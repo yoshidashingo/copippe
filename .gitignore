@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.steering/
+
+# IDE
+.vscode/
+.idea/
+
+# Work
+output/
+
+# Logs
+logs/
+!logs/.gitkeep
+
+# MCP config (contains API keys)
+#.mcp.json
+
+# Google Workspace CLI (credentials & token cache)
+.gws/
+.env.gws
+
+# pptx
+~$*.pptx

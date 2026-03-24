@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* CopippeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001 /* CopippeApp.swift */; };
+		A10002 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002 /* AppState.swift */; };
+		A10003 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003 /* ClipboardMonitor.swift */; };
+		A10004 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004 /* HistoryManager.swift */; };
+		A10005 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005 /* MenuView.swift */; };
+		A10006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10006 /* Assets.xcassets */; };
+		A10011 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011 /* AppStateTests.swift */; };
+		A10012 /* HistoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012 /* HistoryManagerTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D10001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E10001;
+			remoteInfo = copippe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B10001 /* CopippeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopippeApp.swift; sourceTree = "<group>"; };
+		B10002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B10003 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
+		B10004 /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
+		B10005 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		B10006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10007 /* copippe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = copippe.entitlements; sourceTree = "<group>"; };
+		B10008 /* copippe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = copippe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10010 /* copippeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = copippeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10011 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		B10012 /* HistoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManagerTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F10002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10001 = {
+			isa = PBXGroup;
+			children = (
+				G10002 /* copippe */,
+				G10003 /* copippeTests */,
+				G10004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10002 /* copippe */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* CopippeApp.swift */,
+				B10002 /* AppState.swift */,
+				B10003 /* ClipboardMonitor.swift */,
+				B10004 /* HistoryManager.swift */,
+				B10005 /* MenuView.swift */,
+				B10006 /* Assets.xcassets */,
+				B10007 /* copippe.entitlements */,
+			);
+			path = copippe;
+			sourceTree = "<group>";
+		};
+		G10003 /* copippeTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10011 /* AppStateTests.swift */,
+				B10012 /* HistoryManagerTests.swift */,
+			);
+			path = copippeTests;
+			sourceTree = "<group>";
+		};
+		G10004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10008 /* copippe.app */,
+				B10010 /* copippeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10001 /* copippe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L10002 /* Build configuration list for PBXNativeTarget "copippe" */;
+			buildPhases = (
+				S10001 /* Sources */,
+				F10001 /* Frameworks */,
+				R10001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = copippe;
+			productName = copippe;
+			productReference = B10008 /* copippe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E10002 /* copippeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L10003 /* Build configuration list for PBXNativeTarget "copippeTests" */;
+			buildPhases = (
+				S10002 /* Sources */,
+				F10002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				T10001 /* PBXTargetDependency */,
+			);
+			name = copippeTests;
+			productName = copippeTests;
+			productReference = B10010 /* copippeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					E10001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					E10002 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = E10001;
+					};
+				};
+			};
+			buildConfigurationList = L10001 /* Build configuration list for PBXProject "copippe" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ja,
+			);
+			mainGroup = G10001;
+			productRefGroup = G10004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10001 /* copippe */,
+				E10002 /* copippeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R10001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10006 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* CopippeApp.swift in Sources */,
+				A10002 /* AppState.swift in Sources */,
+				A10003 /* ClipboardMonitor.swift in Sources */,
+				A10004 /* HistoryManager.swift in Sources */,
+				A10005 /* MenuView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10011 /* AppStateTests.swift in Sources */,
+				A10012 /* HistoryManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		T10001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E10001 /* copippe */;
+			targetProxy = C10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		X10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		X10002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		X10003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = copippe/copippe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copippe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		X10004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = copippe/copippe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copippe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		X10005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copippe.copippeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/copippe.app/Contents/MacOS/copippe";
+			};
+			name = Debug;
+		};
+		X10006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copippe.copippeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/copippe.app/Contents/MacOS/copippe";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		L10001 /* Build configuration list for PBXProject "copippe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10001 /* Debug */,
+				X10002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10002 /* Build configuration list for PBXNativeTarget "copippe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10003 /* Debug */,
+				X10004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10003 /* Build configuration list for PBXNativeTarget "copippeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				X10005 /* Debug */,
+				X10006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = D10001 /* Project object */;
+}
