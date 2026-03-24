@@ -43,7 +43,14 @@
 2. Open the `.zip` or `.dmg` and move `copippe.app` to your Applications folder
 3. Launch copippe
 
-> **Note**: Since the app is not notarized, you may need to right-click → Open on first launch.
+> **Note**: This app is not notarized. On first launch, macOS will show _"copippe.app can't be opened"_. To open it:
+>
+> **Option A**: Right-click (or Control-click) `copippe.app` → **Open** → Click **Open** in the dialog
+>
+> **Option B**: Run the following command in Terminal:
+> ```
+> xattr -cr /Applications/copippe.app
+> ```
 
 ## Usage
 
