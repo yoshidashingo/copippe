@@ -43,14 +43,18 @@
 2. Open the `.zip` or `.dmg` and move `copippe.app` to your Applications folder
 3. Launch copippe
 
-> **Note**: This app is not notarized. On first launch, macOS will show _"copippe.app can't be opened"_. To open it:
+> **Note**: This app is not notarized. On first launch, macOS will block it. To open it:
 >
-> **Option A**: Right-click (or Control-click) `copippe.app` → **Open** → Click **Open** in the dialog
->
-> **Option B**: Run the following command in Terminal:
+> **Option A** (Terminal):
 > ```
 > xattr -cr /Applications/copippe.app
 > ```
+> Then launch the app normally.
+>
+> **Option B** (System Settings):
+> 1. Try to open `copippe.app` (it will be blocked)
+> 2. Open **System Settings** → **Privacy & Security**
+> 3. Scroll down to find the blocked app message and click **Open Anyway**
 
 ## Usage
 
