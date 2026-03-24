@@ -37,7 +37,11 @@
 
 ## Installation
 
-Download the latest `.zip` from [Releases](../../releases), unzip, and move `copippe.app` to your Applications folder.
+1. Download the latest version from the **[Releases page](https://github.com/yoshidashingo/copippe/releases/latest)**:
+   - [`copippe-v0.1.zip`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.1.zip) — Zip archive
+   - [`copippe-v0.1.dmg`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.1.dmg) — Disk image
+2. Open the `.zip` or `.dmg` and move `copippe.app` to your Applications folder
+3. Launch copippe
 
 > **Note**: Since the app is not notarized, you may need to right-click → Open on first launch.
 
