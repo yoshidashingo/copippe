@@ -1,5 +1,9 @@
 # copippe
 
+<p align="center">
+  <img src="docs/icon.png" alt="copippe icon" width="128">
+</p>
+
 A simple, lightweight clipboard tool for macOS that lives in your menu bar.
 
 [日本語](README-ja.md)
