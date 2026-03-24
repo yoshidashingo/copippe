@@ -1,12 +1,19 @@
-# copippe
+<h1 align="center">
+  <img src="docs/icon.png" alt="copippe" width="128">
+  <br>
+  copippe
+  <br>
+  <br>
+</h1>
 
 <p align="center">
-  <img src="docs/icon.png" alt="copippe icon" width="128">
+  Macで稼働するシンプルでメモリフットプリントの小さいクリップボードツールです。
 </p>
 
-Macで稼働するシンプルでメモリフットプリントの小さいクリップボードツールです。
-
-[English](README.md)
+<p align="center">
+  <a href="README.md">English</a> •
+  <a href="README-ja.md">日本語</a>
+</p>
 
 ## 特徴
 
