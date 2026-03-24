@@ -11,9 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yoshidashingo/copippe/releases/latest"><img src="https://img.shields.io/github/v/release/yoshidashingo/copippe" alt="release"></a>
-
-  <a href="https://github.com/yoshidashingo/copippe/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yoshidashingo/copippe" alt="license"></a>
+  <a href="https://github.com/yoshidashingo/copippe/releases/latest"><img src="https://img.shields.io/github/v/release/yoshidashingo/copippe?v=1" alt="release"></a>
+  <a href="https://github.com/yoshidashingo/copippe/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yoshidashingo/copippe?v=1" alt="license"></a>
   <img src="https://img.shields.io/badge/platform-macOS%2014%2B-blue" alt="platform">
   <img src="https://img.shields.io/badge/swift-6-orange" alt="swift">
 </p>
