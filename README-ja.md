@@ -37,7 +37,7 @@
 
 ## インストール
 
-1. **[Releases ページ](https://github.com/yoshidashingo/copippe/releases/latest)**から最新版をダウンロード:
+1. **[Releases ページ](https://github.com/yoshidashingo/copippe/releases/latest)** から最新版をダウンロード:
    - [`copippe-v0.1.zip`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.1.zip) — Zipアーカイブ
    - [`copippe-v0.1.dmg`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.1.dmg) — ディスクイメージ
 2. `.zip` または `.dmg` を開き、`copippe.app` をアプリケーションフォルダに移動
