@@ -9,6 +9,7 @@
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # Work
 output/
