@@ -322,6 +322,18 @@
         <p>Drag to your Applications folder and launch</p>
       </div>
     </div>
+    <div style="max-width:600px;margin:32px auto 0;text-align:left;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <p style="font-weight:600;margin-bottom:8px">Note: This app is not notarized.</p>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px">macOS will block the app on first launch. Use one of the following to open it:</p>
+      <p style="font-size:14px;margin-bottom:8px"><strong>Option A</strong> — Run in Terminal:</p>
+      <pre style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:13px;overflow-x:auto"><code>xattr -cr /Applications/copippe.app</code></pre>
+      <p style="font-size:14px;margin-top:12px;margin-bottom:4px"><strong>Option B</strong> — System Settings:</p>
+      <ol style="font-size:14px;color:var(--text-secondary);padding-left:20px">
+        <li>Try to open copippe.app (it will be blocked)</li>
+        <li>Open <strong>System Settings → Privacy &amp; Security</strong></li>
+        <li>Scroll down and click <strong>Open Anyway</strong></li>
+      </ol>
+    </div>
   </div>
 </section>
 

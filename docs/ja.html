@@ -322,6 +322,18 @@
         <p>アプリケーションフォルダにドラッグして起動</p>
       </div>
     </div>
+    <div style="max-width:600px;margin:32px auto 0;text-align:left;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <p style="font-weight:600;margin-bottom:8px">注意: このアプリは公証（Notarization）されていません。</p>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px">初回起動時にmacOSによってブロックされます。以下のいずれかの方法で開いてください:</p>
+      <p style="font-size:14px;margin-bottom:8px"><strong>方法A</strong> — ターミナルで実行:</p>
+      <pre style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:13px;overflow-x:auto"><code>xattr -cr /Applications/copippe.app</code></pre>
+      <p style="font-size:14px;margin-top:12px;margin-bottom:4px"><strong>方法B</strong> — システム設定:</p>
+      <ol style="font-size:14px;color:var(--text-secondary);padding-left:20px">
+        <li>copippe.appを開こうとする（ブロックされます）</li>
+        <li><strong>システム設定 → プライバシーとセキュリティ</strong> を開く</li>
+        <li>下にスクロールして <strong>このまま開く</strong> をクリック</li>
+      </ol>
+    </div>
   </div>
 </section>
 
