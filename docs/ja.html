@@ -6,349 +6,153 @@
   <title>copippe — macOS用 軽量クリップボードツール</title>
   <meta name="description" content="macOS用のシンプルで軽量なクリップボードツール。書式の除去とクリップボード履歴をメニューバーから。">
   <style>
-    :root {
-      --blue-start: #5aa5f2;
-      --blue-end: #3373d9;
-      --bg: #fafbfc;
-      --text: #24292e;
-      --text-secondary: #586069;
-      --card-bg: #ffffff;
-      --border: #e1e4e8;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d1117;
-        --text: #c9d1d9;
-        --text-secondary: #8b949e;
-        --card-bg: #161b22;
-        --border: #30363d;
-      }
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, var(--blue-start), var(--blue-end));
-      color: #fff;
-      text-align: center;
-      padding: 80px 20px 60px;
-    }
-
-    .hero-icon {
-      font-size: 72px;
-      margin-bottom: 16px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      opacity: 0.9;
-      max-width: 560px;
-      margin: 0 auto 32px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .btn-primary {
+      color: #1d1d1f;
       background: #fff;
-      color: var(--blue-end);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
 
-    .btn-secondary {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .features {
-      padding: 64px 20px;
-    }
-
-    .features h2 {
+    header {
       text-align: center;
-      font-size: 32px;
-      margin-bottom: 40px;
+      padding: 80px 24px 48px;
+      border-bottom: 1px solid #f0f0f0;
     }
+    header img { width: 96px; height: 96px; border-radius: 22%; }
+    header h1 { font-size: 36px; font-weight: 700; margin: 16px 0 8px; letter-spacing: -0.5px; }
+    header p { font-size: 17px; color: #6e6e73; max-width: 400px; margin: 0 auto 24px; }
+    .lang { font-size: 13px; color: #86868b; }
+    .lang a { color: #86868b; }
 
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-
-    .feature-card .icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-
-    .feature-card h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-      font-size: 15px;
-    }
-
-    .install {
-      padding: 64px 20px;
-      text-align: center;
-    }
-
-    .install h2 {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-
-    .install p {
-      color: var(--text-secondary);
-      font-size: 16px;
-      margin-bottom: 32px;
-    }
-
-    .steps {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .step {
-      flex: 1;
-      min-width: 180px;
-      text-align: center;
-    }
-
-    .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-start), var(--blue-end));
-      color: #fff;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-
-    .step h3 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .step p {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .requirements {
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .req-badge {
+    .dl-btn {
       display: inline-block;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: #0066cc;
+      color: #fff;
+      padding: 10px 28px;
       border-radius: 8px;
-      padding: 12px 24px;
       font-size: 15px;
-      color: var(--text-secondary);
+      font-weight: 600;
+      margin: 20px 4px 0;
+      transition: background 0.2s;
+    }
+    .dl-btn:hover { background: #0055b3; text-decoration: none; }
+    .dl-btn-secondary {
+      background: transparent;
+      color: #0066cc;
+      border: 1px solid #d2d2d7;
+    }
+    .dl-btn-secondary:hover { background: #f5f5f7; }
+
+    section { padding: 48px 24px; border-bottom: 1px solid #f0f0f0; }
+    section:last-of-type { border-bottom: none; }
+    section h2 { font-size: 22px; font-weight: 600; margin-bottom: 20px; }
+
+    ul.features { list-style: none; }
+    ul.features li { padding: 6px 0; font-size: 15px; }
+    ul.features li::before { content: "—"; color: #86868b; margin-right: 8px; }
+
+    .install-note {
+      background: #f5f5f7;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #1d1d1f;
+    }
+    .install-note p { margin-bottom: 8px; }
+    .install-note code {
+      background: #e8e8ed;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .install-note ol { padding-left: 20px; color: #6e6e73; font-size: 13px; }
+
+    .faq dt {
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+    .faq dt:first-child { margin-top: 0; }
+    .faq dd {
+      font-size: 14px;
+      color: #6e6e73;
+      margin-top: 4px;
     }
 
     footer {
       text-align: center;
-      padding: 40px 20px;
-      color: var(--text-secondary);
-      font-size: 14px;
-      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      font-size: 13px;
+      color: #86868b;
     }
-
-    footer a {
-      color: var(--text-secondary);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .lang-switch {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-    }
-
-    .lang-switch a {
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .lang-switch a:hover {
-      color: #fff;
-    }
-
-    .hero-wrapper {
-      position: relative;
-    }
+    footer a { color: #86868b; }
   </style>
 </head>
 <body>
 
-<div class="hero-wrapper">
-  <div class="lang-switch"><a href="index.html">English</a></div>
-  <section class="hero">
-    <div class="hero-icon"><img src="icon.png" alt="copippe icon" width="128" height="128" style="border-radius:22%"></div>
-    <h1>copippe</h1>
-    <p>macOS用のシンプルで軽量なクリップボードツール。書式の除去と履歴管理をメニューバーから。</p>
-    <div class="hero-buttons">
-      <a href="https://github.com/yoshidashingo/copippe/releases/latest" class="btn btn-primary">ダウンロード</a>
-      <a href="https://github.com/yoshidashingo/copippe" class="btn btn-secondary">GitHub</a>
-    </div>
-  </section>
-</div>
+<header>
+  <img src="icon.png" alt="copippe">
+  <h1>copippe</h1>
+  <p>macOS用の軽量クリップボードツール。書式除去と履歴管理をメニューバーから。</p>
+  <a href="https://github.com/yoshidashingo/copippe/releases/latest" class="dl-btn">ダウンロード</a>
+  <a href="https://github.com/yoshidashingo/copippe" class="dl-btn dl-btn-secondary">GitHub</a>
+  <br>
+  <p class="lang" style="margin-top:20px"><a href="index.html">English</a> · <a href="ja.html">日本語</a></p>
+</header>
 
-<section class="features">
+<section>
   <div class="container">
     <h2>特徴</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="icon">✂️</div>
-        <h3>プレーンテキストペースト</h3>
-        <p>コピー時にリッチテキストの書式（HTML、RTF、スタイル）を自動除去。常にクリーンなプレーンテキストで貼り付け。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">📜</div>
-        <h3>クリップボード履歴</h3>
-        <p>メニューバーから最大20件の履歴にアクセス。クリックしてコピー、⌘Vで貼り付け。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🪶</div>
-        <h3>軽量設計</h3>
-        <p>SwiftとSwiftUIで構築。メモリ使用量を最小限に抑え、Dockにアイコンを表示せず、邪魔になりません。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">💾</div>
-        <h3>履歴の永続化</h3>
-        <p>クリップボード履歴はローカルに保存され、アプリ再起動後も復元されます。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🚀</div>
-        <h3>自動起動</h3>
-        <p>macOSのログイン項目で自動起動。一度設定すれば意識する必要はありません。</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🔒</div>
-        <h3>プライバシー重視</h3>
-        <p>すべてのデータはMac内に保存。ネットワーク通信、アナリティクス、トラッキングは一切ありません。</p>
-      </div>
-    </div>
+    <ul class="features">
+      <li>コピー時にリッチテキストの書式を自動除去 — 常にプレーンテキストで貼り付け</li>
+      <li>メニューバーから最大20件のクリップボード履歴にアクセス</li>
+      <li>メニューバーに常駐、Dockアイコンなし</li>
+      <li>アプリ再起動後も履歴を保持</li>
+      <li>ログイン時に自動起動</li>
+      <li>Swift & SwiftUIで構築 — 軽量なメモリフットプリント</li>
+    </ul>
   </div>
 </section>
 
-<section class="install">
+<section>
   <div class="container">
     <h2>インストール</h2>
-    <p>数秒で始められます。</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>ダウンロード</h3>
-        <p>GitHub Releasesから最新の.zipを取得</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>解凍</h3>
-        <p>アーカイブからcopippe.appを展開</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>アプリケーションに移動</h3>
-        <p>アプリケーションフォルダにドラッグして起動</p>
-      </div>
-    </div>
-    <div style="max-width:600px;margin:32px auto 0;text-align:left;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:24px">
-      <p style="font-weight:600;margin-bottom:8px">注意: このアプリは公証（Notarization）されていません。</p>
-      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px">初回起動時にmacOSによってブロックされます。以下のいずれかの方法で開いてください:</p>
-      <p style="font-size:14px;margin-bottom:8px"><strong>方法A</strong> — ターミナルで実行:</p>
-      <pre style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:13px;overflow-x:auto"><code>xattr -cr /Applications/copippe.app</code></pre>
-      <p style="font-size:14px;margin-top:12px;margin-bottom:4px"><strong>方法B</strong> — システム設定:</p>
-      <ol style="font-size:14px;color:var(--text-secondary);padding-left:20px">
-        <li>copippe.appを開こうとする（ブロックされます）</li>
-        <li><strong>システム設定 → プライバシーとセキュリティ</strong> を開く</li>
-        <li>下にスクロールして <strong>このまま開く</strong> をクリック</li>
-      </ol>
+    <p style="font-size:15px"><a href="https://github.com/yoshidashingo/copippe/releases/latest">GitHub Releases</a> からダウンロードし、解凍後アプリケーションフォルダに移動して起動。</p>
+    <p style="font-size:14px;color:#6e6e73;margin-top:4px">macOS 14 (Sonoma) 以降が必要です。</p>
+    <div class="install-note">
+      <p><strong>このアプリは公証（Notarization）されていません。</strong>初回起動時にmacOSによってブロックされます。</p>
+      <p>ターミナルで実行: <code>xattr -cr /Applications/copippe.app</code></p>
+      <p style="margin-bottom:0">または: アプリを開こうとする → <strong>システム設定 → プライバシーとセキュリティ → このまま開く</strong></p>
     </div>
   </div>
 </section>
 
-<section class="requirements">
+<section>
   <div class="container">
-    <span class="req-badge">macOS 14 (Sonoma) 以降が必要です</span>
+    <h2>FAQ</h2>
+    <dl class="faq">
+      <dt>セキュリティは大丈夫ですか？</dt>
+      <dd>はい。ソースコードは<a href="https://github.com/yoshidashingo/copippe">GitHub</a>で全て公開しています。ご自身で確認・ビルドが可能です。</dd>
+
+      <dt>サポートはしてもらえますか？</dt>
+      <dd><a href="mailto:support@copippe.com">support@copippe.com</a> にご連絡いただけますが、不具合報告や機能追加のご要望はGitHubの<a href="https://github.com/yoshidashingo/copippe/pulls">プルリクエスト</a>のみで受け付けています。</dd>
+
+      <dt>複数ライセンスの販売予定はありますか？</dt>
+      <dd>App Store以外でのライセンス販売は計画していません。</dd>
+    </dl>
   </div>
 </section>
 
 <footer>
-  <p>
-    <a href="https://github.com/yoshidashingo/copippe">GitHub</a> ·
-    <a href="https://github.com/yoshidashingo/copippe/releases">リリース</a> ·
-    MIT License
-  </p>
+  <a href="https://github.com/yoshidashingo/copippe">GitHub</a> ·
+  <a href="https://github.com/yoshidashingo/copippe/releases">リリース</a> ·
+  MIT License
 </footer>
 
 </body>
