@@ -3,6 +3,8 @@ import SwiftUI
 struct MenuView: View {
     let appState: AppState
     let historyManager: HistoryManager
+    let snippetManager: SnippetManager
+    var onOpenPreferences: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -41,6 +43,45 @@ struct MenuView: View {
                     historyManager.clearAll()
                 }
             }
+
+            Divider()
+
+            // Snippet section
+            if !snippetManager.folders.isEmpty {
+                ForEach(snippetManager.folders) { folder in
+                    Menu(folder.name) {
+                        if folder.snippets.isEmpty {
+                            Text("No snippets")
+                                .foregroundStyle(.secondary)
+                        } else {
+                            ForEach(folder.snippets) { snippet in
+                                Button {
+                                    let pasteboard = NSPasteboard.general
+                                    pasteboard.clearContents()
+                                    pasteboard.setString(snippet.content, forType: .string)
+                                } label: {
+                                    HStack {
+                                        Text(snippet.title)
+                                        if let hotkey = snippet.hotkey {
+                                            Spacer()
+                                            Text(hotkey.displayString)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Divider()
+            }
+
+            // Preferences
+            Button("Preferences...") {
+                onOpenPreferences?()
+            }
+            .keyboardShortcut(",", modifiers: [.command])
 
             Divider()
 
