@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>copippe — Lightweight Clipboard Tool for macOS</title>
-  <meta name="description" content="A simple, lightweight clipboard tool for macOS. Strip rich text formatting, manage clipboard history, all from your menu bar.">
+  <meta name="description" content="A full-featured clipboard manager for macOS. Text and image history, snippet management, global hotkeys, and floating search popup — all from your menu bar.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -99,7 +99,7 @@
 <header>
   <img src="icon.png" alt="copippe">
   <h1>copippe</h1>
-  <p>A lightweight clipboard tool for macOS. Strip formatting, keep history.</p>
+  <p>A full-featured clipboard manager for macOS. History, snippets, search, and global hotkeys.</p>
   <a href="https://github.com/yoshidashingo/copippe/releases/latest" class="dl-btn">Download</a>
   <a href="https://github.com/yoshidashingo/copippe" class="dl-btn dl-btn-secondary">GitHub</a>
   <br>
@@ -108,12 +108,30 @@
 
 <section>
   <div class="container">
-    <h2>Features</h2>
+    <h2>Clipboard</h2>
     <ul class="features">
       <li>Strips rich text formatting on copy — always paste plain text</li>
-      <li>Up to 20 clipboard history entries from the menu bar</li>
-      <li>Runs in the menu bar with no Dock icon</li>
+      <li>Up to 30 text and image clipboard history entries, configurable in Preferences</li>
+      <li>Copied images saved as PNG thumbnails, restorable to clipboard</li>
       <li>History persists across restarts</li>
+    </ul>
+    <h2 style="margin-top:32px">Snippets</h2>
+    <ul class="features">
+      <li>Register and manage frequently used text snippets</li>
+      <li>Organize snippets into folders for quick access</li>
+      <li>Paste snippets from menu bar folder submenus</li>
+      <li>Assign individual global hotkeys to paste specific snippets instantly</li>
+    </ul>
+    <h2 style="margin-top:32px">Search & Quick Access</h2>
+    <ul class="features">
+      <li>Press Shift+Cmd+V from any app to open the floating search popup</li>
+      <li>Incremental search across history and snippets with keyboard navigation</li>
+      <li>Tab switching between history and snippet views</li>
+    </ul>
+    <h2 style="margin-top:32px">General</h2>
+    <ul class="features">
+      <li>Runs in the menu bar with no Dock icon</li>
+      <li>Preferences window for hotkeys, history limit, startup, and snippet management</li>
       <li>Auto-launches at login</li>
       <li>Built with Swift & SwiftUI — minimal memory footprint</li>
     </ul>
@@ -143,8 +161,8 @@
       <dt>Can I get support?</dt>
       <dd>You can reach us at <a href="mailto:support@copippe.com">support@copippe.com</a>. However, bug reports and feature requests are only accepted as <a href="https://github.com/yoshidashingo/copippe/pulls">pull requests</a> on GitHub.</dd>
 
-      <dt>Are there plans for volume or enterprise licensing?</dt>
-      <dd>No. There are no plans to sell licenses outside of the App Store.</dd>
+      <dt>Why is it distributed outside the App Store?</dt>
+      <dd>Global hotkey support requires permissions not available under App Sandbox. copippe is distributed directly via GitHub Releases.</dd>
     </dl>
   </div>
 </section>

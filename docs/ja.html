@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>copippe — macOS用 軽量クリップボードツール</title>
-  <meta name="description" content="macOS用のシンプルで軽量なクリップボードツール。書式の除去とクリップボード履歴をメニューバーから。">
+  <meta name="description" content="macOS用の高機能クリップボードマネージャ。テキスト・画像の履歴管理、スニペット、グローバルホットキー、フローティング検索をメニューバーから。">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -99,7 +99,7 @@
 <header>
   <img src="icon.png" alt="copippe">
   <h1>copippe</h1>
-  <p>macOS用の軽量クリップボードツール。書式除去と履歴管理をメニューバーから。</p>
+  <p>macOS用の高機能クリップボードマネージャ。履歴、スニペット、検索、グローバルホットキー。</p>
   <a href="https://github.com/yoshidashingo/copippe/releases/latest" class="dl-btn">ダウンロード</a>
   <a href="https://github.com/yoshidashingo/copippe" class="dl-btn dl-btn-secondary">GitHub</a>
   <br>
@@ -108,12 +108,30 @@
 
 <section>
   <div class="container">
-    <h2>特徴</h2>
+    <h2>クリップボード</h2>
     <ul class="features">
       <li>コピー時にリッチテキストの書式を自動除去 — 常にプレーンテキストで貼り付け</li>
-      <li>メニューバーから最大20件のクリップボード履歴にアクセス</li>
-      <li>メニューバーに常駐、Dockアイコンなし</li>
+      <li>テキスト・画像を含む最大30件のクリップボード履歴（設定で件数変更可能）</li>
+      <li>コピーした画像をPNGサムネイルで保存、クリップボードに復元可能</li>
       <li>アプリ再起動後も履歴を保持</li>
+    </ul>
+    <h2 style="margin-top:32px">スニペット</h2>
+    <ul class="features">
+      <li>よく使うテキストをスニペットとして登録・管理</li>
+      <li>フォルダでスニペットをグループ分けして整理</li>
+      <li>メニューバーのフォルダサブメニューからすぐに貼り付け</li>
+      <li>スニペットごとにグローバルホットキーを割り当てて即座に貼り付け</li>
+    </ul>
+    <h2 style="margin-top:32px">検索・クイックアクセス</h2>
+    <ul class="features">
+      <li>どのアプリからでも Shift+Cmd+V でフローティング検索ポップアップを表示</li>
+      <li>履歴・スニペットをインクリメンタル検索、キーボードナビゲーション対応</li>
+      <li>履歴タブ・スニペットタブの切り替え</li>
+    </ul>
+    <h2 style="margin-top:32px">全般</h2>
+    <ul class="features">
+      <li>メニューバーに常駐、Dockアイコンなし</li>
+      <li>設定画面でホットキー、履歴件数、起動時動作、スニペット管理が可能</li>
       <li>ログイン時に自動起動</li>
       <li>Swift & SwiftUIで構築 — 軽量なメモリフットプリント</li>
     </ul>
@@ -143,8 +161,8 @@
       <dt>サポートはしてもらえますか？</dt>
       <dd><a href="mailto:support@copippe.com">support@copippe.com</a> にご連絡いただけますが、不具合報告や機能追加のご要望はGitHubの<a href="https://github.com/yoshidashingo/copippe/pulls">プルリクエスト</a>のみで受け付けています。</dd>
 
-      <dt>複数ライセンスの販売予定はありますか？</dt>
-      <dd>App Store以外でのライセンス販売は計画していません。</dd>
+      <dt>なぜApp Store外で配布しているのですか？</dt>
+      <dd>グローバルホットキー機能にはApp Sandboxでは利用できない権限が必要なため、GitHub Releasesから直接配布しています。</dd>
     </dl>
   </div>
 </section>
