@@ -156,7 +156,7 @@ struct PopupContentView: View {
         let entry = historyManager.entries[index]
         HStack(spacing: 8) {
             switch entry {
-            case .text(let string):
+            case .text(_, let string):
                 Image(systemName: "doc.text")
                     .foregroundStyle(.secondary)
                     .frame(width: 20)
@@ -164,7 +164,7 @@ struct PopupContentView: View {
                     .lineLimit(2)
                     .font(.system(size: 13))
 
-            case .image(let imageID):
+            case .image(_, let imageID):
                 if let thumbnail = historyManager.imageStore.thumbnail(id: imageID) {
                     Image(nsImage: thumbnail)
                         .resizable()
