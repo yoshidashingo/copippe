@@ -31,9 +31,7 @@ struct MenuView: View {
                     Button {
                         historyManager.copyToClipboard(at: index)
                     } label: {
-                        Text(previewText(entry))
-                            .lineLimit(1)
-                            .truncationMode(.tail)
+                        historyEntryLabel(entry)
                     }
                 }
 
@@ -50,6 +48,29 @@ struct MenuView: View {
                 NSApplication.shared.terminate(nil)
             }
             .keyboardShortcut("q", modifiers: [.command])
+        }
+    }
+
+    @ViewBuilder
+    private func historyEntryLabel(_ entry: HistoryEntry) -> some View {
+        switch entry {
+        case .text(let string):
+            Text(previewText(string))
+                .lineLimit(1)
+                .truncationMode(.tail)
+        case .image(let imageID):
+            HStack(spacing: 4) {
+                if let thumbnail = historyManager.imageStore.thumbnail(id: imageID) {
+                    Image(nsImage: thumbnail)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                } else {
+                    Image(systemName: "photo")
+                }
+                Text("Image")
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 

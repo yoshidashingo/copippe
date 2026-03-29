@@ -37,43 +37,61 @@ final class ClipboardMonitor {
         guard currentCount != lastChangeCount else { return }
         lastChangeCount = currentCount
 
-        // Skip if we caused this clipboard change
         guard !isUpdatingClipboard else { return }
-
-        guard appState.isActive else { return }
 
         handleClipboardChange()
     }
 
     private func handleClipboardChange() {
-        guard let plainText = convertToPlainText() else { return }
-
-        historyManager.addEntry(plainText)
-
-        // Write plain text back to clipboard
-        isUpdatingClipboard = true
         let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.setString(plainText, forType: .string)
-        lastChangeCount = pasteboard.changeCount
-        isUpdatingClipboard = false
+
+        // Check for image first (higher priority when both exist)
+        if let image = extractImage(from: pasteboard) {
+            if let imageID = historyManager.imageStore.save(image) {
+                historyManager.addEntry(.image(imageID: imageID))
+            }
+            return
+        }
+
+        // Handle text
+        guard let plainText = convertToPlainText(from: pasteboard) else { return }
+
+        historyManager.addEntry(.text(plainText))
+
+        // Write plain text back to clipboard only when active
+        if appState.isActive {
+            isUpdatingClipboard = true
+            let pb = NSPasteboard.general
+            pb.clearContents()
+            pb.setString(plainText, forType: .string)
+            lastChangeCount = pb.changeCount
+            isUpdatingClipboard = false
+        }
     }
 
-    private func convertToPlainText() -> String? {
-        let pasteboard = NSPasteboard.general
+    private func extractImage(from pasteboard: NSPasteboard) -> NSImage? {
+        // Check for image types
+        let imageTypes: [NSPasteboard.PasteboardType] = [.tiff, .png]
+        for type in imageTypes {
+            if let data = pasteboard.data(forType: type),
+               let image = NSImage(data: data),
+               image.size.width > 0, image.size.height > 0 {
+                return image
+            }
+        }
+        return nil
+    }
 
-        // Try to get string content from any available type
+    private func convertToPlainText(from pasteboard: NSPasteboard) -> String? {
         if let string = pasteboard.string(forType: .string) {
             return string
         }
 
-        // Try RTF
         if let rtfData = pasteboard.data(forType: .rtf) {
             let attributed = NSAttributedString(rtf: rtfData, documentAttributes: nil)
             return attributed?.string
         }
 
-        // Try HTML
         if let htmlData = pasteboard.data(forType: .html) {
             let attributed = NSAttributedString(html: htmlData, documentAttributes: nil)
             return attributed?.string

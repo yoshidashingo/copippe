@@ -4,8 +4,9 @@ import Observation
 
 @Observable
 final class HistoryManager {
-    private(set) var entries: [String] = []
-    static let maxEntries = 20
+    private(set) var entries: [HistoryEntry] = []
+    let imageStore = ImageStore()
+    private let appState: AppState
 
     private var fileURL: URL {
         let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
@@ -14,27 +15,50 @@ final class HistoryManager {
         return appDir.appendingPathComponent("history.json")
     }
 
-    init() {
+    init(appState: AppState) {
+        self.appState = appState
         load()
     }
 
-    func addEntry(_ text: String) {
-        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
+    // Test-only initializer
+    init(appState: AppState, fileURL: URL) {
+        self.appState = appState
+        self._testFileURL = fileURL
+        load()
+    }
 
-        // Prevent duplicate consecutive entries
-        if entries.first == trimmed {
-            return
+    private var _testFileURL: URL?
+    private var resolvedFileURL: URL {
+        _testFileURL ?? fileURL
+    }
+
+    func addEntry(_ entry: HistoryEntry) {
+        switch entry {
+        case .text(let string):
+            let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else { return }
+
+            let normalizedEntry = HistoryEntry.text(trimmed)
+
+            // Prevent duplicate consecutive entries
+            if entries.first == normalizedEntry { return }
+
+            // Remove existing duplicate text
+            entries.removeAll { $0 == normalizedEntry }
+
+            entries.insert(normalizedEntry, at: 0)
+
+        case .image:
+            entries.insert(entry, at: 0)
         }
 
-        // Remove existing duplicate if present elsewhere
-        entries.removeAll { $0 == trimmed }
-
-        entries.insert(trimmed, at: 0)
-
         // Enforce max entries
-        if entries.count > Self.maxEntries {
-            entries = Array(entries.prefix(Self.maxEntries))
+        let maxCount = appState.maxHistoryCount
+        while entries.count > maxCount {
+            let removed = entries.removeLast()
+            if case .image(let imageID) = removed {
+                imageStore.delete(id: imageID)
+            }
         }
 
         save()
@@ -42,11 +66,20 @@ final class HistoryManager {
 
     func removeEntry(at index: Int) {
         guard entries.indices.contains(index) else { return }
-        entries.remove(at: index)
+        let removed = entries.remove(at: index)
+        if case .image(let imageID) = removed {
+            imageStore.delete(id: imageID)
+        }
         save()
     }
 
     func clearAll() {
+        // Delete all image files
+        for entry in entries {
+            if case .image(let imageID) = entry {
+                imageStore.delete(id: imageID)
+            }
+        }
         entries.removeAll()
         save()
     }
@@ -55,24 +88,58 @@ final class HistoryManager {
         guard entries.indices.contains(index) else { return }
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
-        pasteboard.setString(entries[index], forType: .string)
+
+        switch entries[index] {
+        case .text(let string):
+            pasteboard.setString(string, forType: .string)
+        case .image(let imageID):
+            if let image = imageStore.load(id: imageID),
+               let tiffData = image.tiffRepresentation {
+                pasteboard.setData(tiffData, forType: .tiff)
+            }
+        }
+    }
+
+    func search(_ query: String) -> [Int] {
+        guard !query.isEmpty else { return Array(entries.indices) }
+        let lowercased = query.lowercased()
+        return entries.indices.filter { index in
+            if case .text(let string) = entries[index] {
+                return string.lowercased().contains(lowercased)
+            }
+            return false
+        }
     }
 
     func save() {
         do {
             let data = try JSONEncoder().encode(entries)
-            try data.write(to: fileURL, options: .atomic)
+            try data.write(to: resolvedFileURL, options: .atomic)
         } catch {
-            // Silently fail - history persistence is best-effort
+            // Best-effort persistence
         }
     }
 
     func load() {
-        do {
-            let data = try Data(contentsOf: fileURL)
-            entries = try JSONDecoder().decode([String].self, from: data)
-        } catch {
+        let url = resolvedFileURL
+        guard let data = try? Data(contentsOf: url) else {
             entries = []
+            return
         }
+
+        // Try v2 format first
+        if let decoded = try? JSONDecoder().decode([HistoryEntry].self, from: data) {
+            entries = decoded
+            return
+        }
+
+        // Fallback: migrate from v1 format ([String])
+        if let legacyEntries = try? JSONDecoder().decode([String].self, from: data) {
+            entries = legacyEntries.map { .text($0) }
+            save() // Re-save in v2 format
+            return
+        }
+
+        entries = []
     }
 }

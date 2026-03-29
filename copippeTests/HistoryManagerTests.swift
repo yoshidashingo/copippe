@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import copippe
 
@@ -5,29 +6,30 @@ import Testing
 struct HistoryManagerTests {
 
     private func makeManager() -> HistoryManager {
-        let manager = HistoryManager()
+        let appState = AppState()
+        let manager = HistoryManager(appState: appState)
         manager.clearAll()
         return manager
     }
 
-    @Test("Add entry inserts at beginning")
-    func addEntry() {
+    @Test("Add text entry inserts at beginning")
+    func addTextEntry() {
         let manager = makeManager()
 
-        manager.addEntry("first")
-        manager.addEntry("second")
+        manager.addEntry(.text("first"))
+        manager.addEntry(.text("second"))
 
         #expect(manager.entries.count == 2)
-        #expect(manager.entries[0] == "second")
-        #expect(manager.entries[1] == "first")
+        #expect(manager.entries[0] == .text("second"))
+        #expect(manager.entries[1] == .text("first"))
     }
 
-    @Test("Duplicate consecutive entries are prevented")
+    @Test("Duplicate consecutive text entries are prevented")
     func duplicateConsecutive() {
         let manager = makeManager()
 
-        manager.addEntry("hello")
-        manager.addEntry("hello")
+        manager.addEntry(.text("hello"))
+        manager.addEntry(.text("hello"))
 
         #expect(manager.entries.count == 1)
     }
@@ -36,34 +38,40 @@ struct HistoryManagerTests {
     func duplicateDedup() {
         let manager = makeManager()
 
-        manager.addEntry("aaa")
-        manager.addEntry("bbb")
-        manager.addEntry("aaa")
+        manager.addEntry(.text("aaa"))
+        manager.addEntry(.text("bbb"))
+        manager.addEntry(.text("aaa"))
 
         #expect(manager.entries.count == 2)
-        #expect(manager.entries[0] == "aaa")
-        #expect(manager.entries[1] == "bbb")
+        #expect(manager.entries[0] == .text("aaa"))
+        #expect(manager.entries[1] == .text("bbb"))
     }
 
-    @Test("Max entries enforced at 20")
+    @Test("Max entries enforced at configured limit")
     func maxEntries() {
-        let manager = makeManager()
+        let appState = AppState()
+        appState.maxHistoryCount = 20
+        let manager = HistoryManager(appState: appState)
+        manager.clearAll()
 
         for i in 0..<25 {
-            manager.addEntry("entry \(i)")
+            manager.addEntry(.text("entry \(i)"))
         }
 
-        #expect(manager.entries.count == HistoryManager.maxEntries)
-        #expect(manager.entries[0] == "entry 24")
+        #expect(manager.entries.count == 20)
+        #expect(manager.entries[0] == .text("entry 24"))
+
+        // Cleanup
+        appState.maxHistoryCount = 30
     }
 
-    @Test("Empty and whitespace entries are ignored")
+    @Test("Empty and whitespace text entries are ignored")
     func emptyEntries() {
         let manager = makeManager()
 
-        manager.addEntry("")
-        manager.addEntry("   ")
-        manager.addEntry("\n")
+        manager.addEntry(.text(""))
+        manager.addEntry(.text("   "))
+        manager.addEntry(.text("\n"))
 
         #expect(manager.entries.isEmpty)
     }
@@ -72,23 +80,23 @@ struct HistoryManagerTests {
     func removeEntry() {
         let manager = makeManager()
 
-        manager.addEntry("a")
-        manager.addEntry("b")
-        manager.addEntry("c")
+        manager.addEntry(.text("a"))
+        manager.addEntry(.text("b"))
+        manager.addEntry(.text("c"))
 
         manager.removeEntry(at: 1)
 
         #expect(manager.entries.count == 2)
-        #expect(manager.entries[0] == "c")
-        #expect(manager.entries[1] == "a")
+        #expect(manager.entries[0] == .text("c"))
+        #expect(manager.entries[1] == .text("a"))
     }
 
     @Test("Clear all removes everything")
     func clearAll() {
         let manager = makeManager()
 
-        manager.addEntry("a")
-        manager.addEntry("b")
+        manager.addEntry(.text("a"))
+        manager.addEntry(.text("b"))
         manager.clearAll()
 
         #expect(manager.entries.isEmpty)
@@ -98,9 +106,41 @@ struct HistoryManagerTests {
     func removeInvalidIndex() {
         let manager = makeManager()
 
-        manager.addEntry("a")
+        manager.addEntry(.text("a"))
         manager.removeEntry(at: 5)
 
         #expect(manager.entries.count == 1)
+    }
+
+    @Test("Search finds matching text entries")
+    func searchText() {
+        let manager = makeManager()
+
+        manager.addEntry(.text("Hello World"))
+        manager.addEntry(.text("Goodbye"))
+        manager.addEntry(.text("Hello Again"))
+
+        let results = manager.search("hello")
+        #expect(results.count == 2)
+    }
+
+    @Test("Search returns empty for no matches")
+    func searchNoMatch() {
+        let manager = makeManager()
+
+        manager.addEntry(.text("Hello"))
+        let results = manager.search("xyz")
+        #expect(results.isEmpty)
+    }
+
+    @Test("Image entries are added")
+    func addImageEntry() {
+        let manager = makeManager()
+
+        let imageID = UUID()
+        manager.addEntry(.image(imageID: imageID))
+
+        #expect(manager.entries.count == 1)
+        #expect(manager.entries[0] == .image(imageID: imageID))
     }
 }

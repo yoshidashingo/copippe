@@ -19,7 +19,7 @@ struct CopippeApp: App {
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let appState = AppState()
-    let historyManager = HistoryManager()
+    private(set) lazy var historyManager = HistoryManager(appState: appState)
     private var clipboardMonitor: ClipboardMonitor?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
