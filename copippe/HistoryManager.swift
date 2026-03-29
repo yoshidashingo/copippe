@@ -53,7 +53,7 @@ final class HistoryManager {
         }
 
         // Enforce max entries
-        let maxCount = appState.maxHistoryCount
+        let maxCount = max(1, appState.maxHistoryCount)
         while entries.count > maxCount {
             let removed = entries.removeLast()
             if case .image(_, let imageID) = removed {
@@ -135,7 +135,10 @@ final class HistoryManager {
 
         // Fallback: migrate from v1 format ([String])
         if let legacyEntries = try? JSONDecoder().decode([String].self, from: data) {
-            entries = legacyEntries.map { .text(value: $0) }
+            entries = legacyEntries.compactMap { text in
+                let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                return trimmed.isEmpty ? nil : .text(value: trimmed)
+            }
             save() // Re-save in v2 format
             return
         }

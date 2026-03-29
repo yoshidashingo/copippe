@@ -7,7 +7,8 @@ final class SnippetManager {
     private(set) var folders: [SnippetFolder] = []
 
     private var fileURL: URL {
-        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? FileManager.default.temporaryDirectory
         let appDir = container.appendingPathComponent("copippe", isDirectory: true)
         try? FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: true)
         return appDir.appendingPathComponent("snippets.json")
@@ -93,6 +94,9 @@ final class SnippetManager {
     }
 
     func moveSnippet(id: UUID, toFolderID: UUID) {
+        // Validate destination folder exists before removing from source
+        guard let targetIndex = folders.firstIndex(where: { $0.id == toFolderID }) else { return }
+
         var snippet: Snippet?
         for folderIndex in folders.indices {
             if let snippetIndex = folders[folderIndex].snippets.firstIndex(where: { $0.id == id }) {
@@ -100,8 +104,7 @@ final class SnippetManager {
                 break
             }
         }
-        guard let snippet = snippet,
-              let targetIndex = folders.firstIndex(where: { $0.id == toFolderID }) else { return }
+        guard let snippet = snippet else { return }
         folders[targetIndex].snippets.append(snippet)
         save()
     }
