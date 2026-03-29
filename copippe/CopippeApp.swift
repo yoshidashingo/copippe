@@ -11,21 +11,12 @@ struct CopippeApp: App {
                 appState: appDelegate.appState,
                 historyManager: appDelegate.historyManager,
                 snippetManager: appDelegate.snippetManager,
-                onOpenPreferences: {
-                    NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-                    NSApp.activate(ignoringOtherApps: true)
+                onOpenPreferences: { [weak appDelegate] in
+                    appDelegate?.openPreferences()
                 }
             )
         } label: {
             Image(systemName: appDelegate.appState.isActive ? "doc.on.clipboard.fill" : "doc.on.clipboard")
-        }
-
-        Settings {
-            PreferencesView(
-                appState: appDelegate.appState,
-                snippetManager: appDelegate.snippetManager,
-                hotkeyManager: appDelegate.hotkeyManager
-            )
         }
     }
 }
@@ -72,6 +63,39 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } catch {
             // Not critical
         }
+    }
+
+    // MARK: - Preferences Window
+
+    private var preferencesWindow: NSWindow?
+
+    func openPreferences() {
+        if let window = preferencesWindow {
+            window.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+            return
+        }
+
+        let preferencesView = PreferencesView(
+            appState: appState,
+            snippetManager: snippetManager,
+            hotkeyManager: hotkeyManager
+        )
+
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 500, height: 400),
+            styleMask: [.titled, .closable, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+        window.title = "copippe Preferences"
+        window.contentView = NSHostingView(rootView: preferencesView)
+        window.center()
+        window.isReleasedWhenClosed = false
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+
+        preferencesWindow = window
     }
 
     func applicationWillTerminate(_ notification: Notification) {
