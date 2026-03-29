@@ -6,9 +6,9 @@ import AppKit
 struct ImageStoreTests {
 
     private func makeStore() -> ImageStore {
-        let store = ImageStore()
-        store.deleteAll()
-        return store
+        let tempDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("copippe-tests-\(UUID().uuidString)", isDirectory: true)
+        return ImageStore(directory: tempDir)
     }
 
     private func makeTestImage() -> NSImage {
@@ -21,63 +21,69 @@ struct ImageStoreTests {
     }
 
     @Test("Save and load image")
-    func saveAndLoad() {
+    func saveAndLoad() throws {
         let store = makeStore()
         let image = makeTestImage()
 
-        let id = store.save(image)
-        #expect(id != nil)
+        let id = try #require(store.save(image))
+        let loaded = try #require(store.load(id: id))
+        #expect(loaded.size.width > 0)
 
-        let loaded = store.load(id: id!)
-        #expect(loaded != nil)
-        #expect(loaded!.size.width > 0)
-
-        // Cleanup
-        store.delete(id: id!)
+        store.delete(id: id)
     }
 
     @Test("Delete image")
-    func deleteImage() {
+    func deleteImage() throws {
         let store = makeStore()
         let image = makeTestImage()
 
-        let id = store.save(image)!
+        let id = try #require(store.save(image))
         store.delete(id: id)
 
-        let loaded = store.load(id: id)
-        #expect(loaded == nil)
+        #expect(store.load(id: id) == nil)
     }
 
     @Test("Thumbnail generation")
-    func thumbnail() {
+    func thumbnail() throws {
         let store = makeStore()
         let image = makeTestImage()
 
-        let id = store.save(image)!
-        let thumb = store.thumbnail(id: id, maxSize: 40)
+        let id = try #require(store.save(image))
+        let thumb = try #require(store.thumbnail(id: id, maxSize: 40))
 
-        #expect(thumb != nil)
-        #expect(thumb!.size.width <= 40)
-        #expect(thumb!.size.height <= 40)
+        #expect(thumb.size.width <= 40)
+        #expect(thumb.size.height <= 40)
 
-        // Cleanup
+        store.delete(id: id)
+    }
+
+    @Test("Thumbnails at different sizes are cached independently")
+    func thumbnailDifferentSizes() throws {
+        let store = makeStore()
+        let image = makeTestImage()
+
+        let id = try #require(store.save(image))
+        let large = try #require(store.thumbnail(id: id, maxSize: 80))
+        let small = try #require(store.thumbnail(id: id, maxSize: 20))
+
+        #expect(large.size.width > small.size.width)
+
         store.delete(id: id)
     }
 
     @Test("Load non-existent image returns nil")
     func loadNonExistent() {
         let store = makeStore()
-        let loaded = store.load(id: UUID())
-        #expect(loaded == nil)
+        #expect(store.load(id: UUID()) == nil)
     }
 
     @Test("Delete all clears images")
-    func deleteAll() {
+    func deleteAll() throws {
         let store = makeStore()
         let image = makeTestImage()
 
-        let id1 = store.save(image)!
-        let id2 = store.save(image)!
+        let id1 = try #require(store.save(image))
+        let id2 = try #require(store.save(image))
 
         store.deleteAll()
 

@@ -2,12 +2,21 @@ import Foundation
 import AppKit
 
 final class ImageStore {
-    private let imagesDirectory: URL
-    private var thumbnailCache: [UUID: NSImage] = [:]
+    private struct ThumbnailCacheKey: Hashable {
+        let id: UUID
+        let maxSize: CGFloat
+    }
 
-    init() {
-        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        imagesDirectory = container.appendingPathComponent("copippe/images", isDirectory: true)
+    private let imagesDirectory: URL
+    private var thumbnailCache: [ThumbnailCacheKey: NSImage] = [:]
+
+    init(directory: URL? = nil) {
+        if let directory = directory {
+            imagesDirectory = directory
+        } else {
+            let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            imagesDirectory = container.appendingPathComponent("copippe/images", isDirectory: true)
+        }
         try? FileManager.default.createDirectory(at: imagesDirectory, withIntermediateDirectories: true)
     }
 
@@ -34,7 +43,8 @@ final class ImageStore {
     }
 
     func thumbnail(id: UUID, maxSize: CGFloat = 40) -> NSImage? {
-        if let cached = thumbnailCache[id] {
+        let cacheKey = ThumbnailCacheKey(id: id, maxSize: maxSize)
+        if let cached = thumbnailCache[cacheKey] {
             return cached
         }
 
@@ -54,14 +64,14 @@ final class ImageStore {
                    fraction: 1.0)
         thumbnail.unlockFocus()
 
-        thumbnailCache[id] = thumbnail
+        thumbnailCache[cacheKey] = thumbnail
         return thumbnail
     }
 
     func delete(id: UUID) {
         let fileURL = imagesDirectory.appendingPathComponent("\(id.uuidString).png")
         try? FileManager.default.removeItem(at: fileURL)
-        thumbnailCache.removeValue(forKey: id)
+        thumbnailCache = thumbnailCache.filter { $0.key.id != id }
     }
 
     func deleteAll() {

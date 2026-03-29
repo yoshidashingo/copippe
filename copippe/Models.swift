@@ -3,27 +3,35 @@ import AppKit
 
 // MARK: - History Entry
 
-enum HistoryEntry: Codable, Equatable, Identifiable {
-    case text(String)
-    case image(imageID: UUID)
+enum HistoryEntry: Codable, Identifiable {
+    case text(id: UUID = UUID(), value: String)
+    case image(id: UUID = UUID(), imageID: UUID)
 
-    var id: String {
+    var id: UUID {
         switch self {
-        case .text(let string):
-            return "text:\(string)"
-        case .image(let imageID):
-            return "image:\(imageID.uuidString)"
+        case .text(let id, _): return id
+        case .image(let id, _): return id
         }
     }
 
     var textValue: String? {
-        if case .text(let string) = self { return string }
+        if case .text(_, let value) = self { return value }
         return nil
     }
 
     var imageID: UUID? {
-        if case .image(let id) = self { return id }
+        if case .image(_, let imageID) = self { return imageID }
         return nil
+    }
+}
+
+extension HistoryEntry: Equatable {
+    static func == (lhs: HistoryEntry, rhs: HistoryEntry) -> Bool {
+        switch (lhs, rhs) {
+        case (.text(_, let a), .text(_, let b)): return a == b
+        case (.image(_, let a), .image(_, let b)): return a == b
+        default: return false
+        }
     }
 }
 
