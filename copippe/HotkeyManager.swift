@@ -4,8 +4,7 @@ import Carbon.HIToolbox
 
 @MainActor
 final class HotkeyManager {
-    private var eventTap: CFMachPort?
-    private var runLoopSource: CFRunLoopSource?
+    private var globalMonitor: Any?
     private var registeredHotkeys: [HotkeyAction: HotkeyBinding] = [:]
 
     var onAction: ((HotkeyAction) -> Void)?
@@ -28,10 +27,7 @@ final class HotkeyManager {
             saveHotkeys()
         }
 
-        let eventMask: CGEventMask = (1 << CGEventType.keyDown.rawValue)
-
-        // Use addGlobalMonitorForEvents as a fallback-friendly approach
-        NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { [weak self] event in
+        globalMonitor = NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { [weak self] event in
             let keyCode = event.keyCode
             let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).rawValue
             Task { @MainActor in
@@ -41,13 +37,9 @@ final class HotkeyManager {
     }
 
     func stop() {
-        if let eventTap = eventTap {
-            CGEvent.tapEnable(tap: eventTap, enable: false)
-            self.eventTap = nil
-        }
-        if let runLoopSource = runLoopSource {
-            CFRunLoopRemoveSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
-            self.runLoopSource = nil
+        if let monitor = globalMonitor {
+            NSEvent.removeMonitor(monitor)
+            globalMonitor = nil
         }
     }
 
