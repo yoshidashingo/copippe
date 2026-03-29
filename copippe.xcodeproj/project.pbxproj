@@ -18,6 +18,12 @@
 		A10021 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10021 /* Models.swift */; };
 		A10022 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10022 /* ImageStore.swift */; };
 		A10032 /* ImageStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032 /* ImageStoreTests.swift */; };
+		A10023 /* SnippetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10023 /* SnippetManager.swift */; };
+		A10031 /* SnippetManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031 /* SnippetManagerTests.swift */; };
+		A10024 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024 /* HotkeyManager.swift */; };
+		A10033 /* HotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033 /* HotkeyManagerTests.swift */; };
+		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
+		A10026 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* PreferencesWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,12 @@
 		B10021 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B10022 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		B10032 /* ImageStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoreTests.swift; sourceTree = "<group>"; };
+		B10023 /* SnippetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetManager.swift; sourceTree = "<group>"; };
+		B10031 /* SnippetManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetManagerTests.swift; sourceTree = "<group>"; };
+		B10024 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
+		B10033 /* HotkeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManagerTests.swift; sourceTree = "<group>"; };
+		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
+		B10026 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +96,10 @@
 				B10005 /* MenuView.swift */,
 				B10021 /* Models.swift */,
 				B10022 /* ImageStore.swift */,
+				B10023 /* SnippetManager.swift */,
+				B10024 /* HotkeyManager.swift */,
+				B10025 /* PopupWindow.swift */,
+				B10026 /* PreferencesWindow.swift */,
 				B10006 /* Assets.xcassets */,
 				B10007 /* copippe.entitlements */,
 			);
@@ -96,6 +112,8 @@
 				B10011 /* AppStateTests.swift */,
 				B10012 /* HistoryManagerTests.swift */,
 				B10032 /* ImageStoreTests.swift */,
+				B10031 /* SnippetManagerTests.swift */,
+				B10033 /* HotkeyManagerTests.swift */,
 			);
 			path = copippeTests;
 			sourceTree = "<group>";
@@ -208,6 +226,10 @@
 				A10005 /* MenuView.swift in Sources */,
 				A10021 /* Models.swift in Sources */,
 				A10022 /* ImageStore.swift in Sources */,
+				A10023 /* SnippetManager.swift in Sources */,
+				A10024 /* HotkeyManager.swift in Sources */,
+				A10025 /* PopupWindow.swift in Sources */,
+				A10026 /* PreferencesWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +240,8 @@
 				A10011 /* AppStateTests.swift in Sources */,
 				A10012 /* HistoryManagerTests.swift in Sources */,
 				A10032 /* ImageStoreTests.swift in Sources */,
+				A10031 /* SnippetManagerTests.swift in Sources */,
+				A10033 /* HotkeyManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
