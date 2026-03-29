@@ -34,11 +34,11 @@ final class HistoryManager {
 
     func addEntry(_ entry: HistoryEntry) {
         switch entry {
-        case .text(let string):
+        case .text(_, let string):
             let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmed.isEmpty else { return }
 
-            let normalizedEntry = HistoryEntry.text(trimmed)
+            let normalizedEntry = HistoryEntry.text(value: trimmed)
 
             // Prevent duplicate consecutive entries
             if entries.first == normalizedEntry { return }
@@ -56,7 +56,7 @@ final class HistoryManager {
         let maxCount = appState.maxHistoryCount
         while entries.count > maxCount {
             let removed = entries.removeLast()
-            if case .image(let imageID) = removed {
+            if case .image(_, let imageID) = removed {
                 imageStore.delete(id: imageID)
             }
         }
@@ -67,7 +67,7 @@ final class HistoryManager {
     func removeEntry(at index: Int) {
         guard entries.indices.contains(index) else { return }
         let removed = entries.remove(at: index)
-        if case .image(let imageID) = removed {
+        if case .image(_, let imageID) = removed {
             imageStore.delete(id: imageID)
         }
         save()
@@ -76,7 +76,7 @@ final class HistoryManager {
     func clearAll() {
         // Delete all image files
         for entry in entries {
-            if case .image(let imageID) = entry {
+            if case .image(_, let imageID) = entry {
                 imageStore.delete(id: imageID)
             }
         }
@@ -90,9 +90,9 @@ final class HistoryManager {
         pasteboard.clearContents()
 
         switch entries[index] {
-        case .text(let string):
+        case .text(_, let string):
             pasteboard.setString(string, forType: .string)
-        case .image(let imageID):
+        case .image(_, let imageID):
             if let image = imageStore.load(id: imageID),
                let tiffData = image.tiffRepresentation {
                 pasteboard.setData(tiffData, forType: .tiff)
@@ -104,7 +104,7 @@ final class HistoryManager {
         guard !query.isEmpty else { return Array(entries.indices) }
         let lowercased = query.lowercased()
         return entries.indices.filter { index in
-            if case .text(let string) = entries[index] {
+            if case .text(_, let string) = entries[index] {
                 return string.lowercased().contains(lowercased)
             }
             return false
@@ -135,7 +135,7 @@ final class HistoryManager {
 
         // Fallback: migrate from v1 format ([String])
         if let legacyEntries = try? JSONDecoder().decode([String].self, from: data) {
-            entries = legacyEntries.map { .text($0) }
+            entries = legacyEntries.map { .text(value: $0) }
             save() // Re-save in v2 format
             return
         }

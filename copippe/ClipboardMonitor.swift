@@ -56,7 +56,7 @@ final class ClipboardMonitor {
         // Handle text
         guard let plainText = convertToPlainText(from: pasteboard) else { return }
 
-        historyManager.addEntry(.text(plainText))
+        historyManager.addEntry(.text(value: plainText))
 
         // Write plain text back to clipboard only when active
         if appState.isActive {
