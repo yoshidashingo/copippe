@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>copippe — User Guide</title>
+  <meta name="description" content="Complete user guide for copippe, a clipboard manager for macOS. Covers clipboard history, snippets, global hotkeys, search popup, and preferences.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: #1d1d1f;
+      background: #fff;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      text-align: center;
+      padding: 48px 24px 32px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.3px; }
+    header p { font-size: 14px; color: #6e6e73; margin-top: 4px; }
+    .lang { font-size: 13px; color: #86868b; margin-top: 12px; }
+    .lang a { color: #86868b; }
+    .back { font-size: 13px; color: #86868b; margin-top: 8px; }
+    .back a { color: #86868b; }
+
+    nav.toc {
+      padding: 32px 24px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    nav.toc h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+    nav.toc ol { padding-left: 20px; font-size: 14px; }
+    nav.toc li { padding: 3px 0; }
+    nav.toc a { color: #0066cc; }
+
+    article { padding: 40px 24px; }
+    article section { margin-bottom: 48px; }
+    article h2 {
+      font-size: 22px; font-weight: 600; margin-bottom: 8px;
+      padding-bottom: 8px; border-bottom: 1px solid #f0f0f0;
+    }
+    article h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+    article p { font-size: 15px; margin-bottom: 12px; }
+    article ul, article ol { font-size: 15px; padding-left: 24px; margin-bottom: 12px; }
+    article li { padding: 2px 0; }
+    article code {
+      background: #f5f5f7; padding: 2px 6px; border-radius: 4px;
+      font-size: 13px; font-family: "SF Mono", Menlo, monospace;
+    }
+    article pre {
+      background: #f5f5f7; padding: 16px; border-radius: 8px;
+      font-size: 13px; overflow-x: auto; margin-bottom: 12px;
+    }
+    article pre code { background: none; padding: 0; }
+
+    .kbd {
+      display: inline-block; background: #f5f5f7; border: 1px solid #d2d2d7;
+      border-radius: 4px; padding: 1px 6px; font-size: 13px;
+      font-family: -apple-system, sans-serif; box-shadow: 0 1px 0 #d2d2d7;
+    }
+
+    .screenshot {
+      text-align: center; margin: 20px 0;
+    }
+    .screenshot img {
+      max-width: 100%; border-radius: 8px;
+      border: 1px solid #e8e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .screenshot figcaption {
+      font-size: 13px; color: #86868b; margin-top: 8px;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 12px;
+    }
+    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #f0f0f0; }
+    th { font-weight: 600; background: #fafafa; }
+
+    .tip {
+      background: #f0f7ff; border-left: 3px solid #0066cc;
+      padding: 12px 16px; border-radius: 0 8px 8px 0;
+      font-size: 14px; margin: 16px 0;
+    }
+
+    footer {
+      text-align: center; padding: 32px 24px; font-size: 13px; color: #86868b;
+      border-top: 1px solid #f0f0f0;
+    }
+    footer a { color: #86868b; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>copippe User Guide</h1>
+  <p>Complete guide to using copippe clipboard manager for macOS</p>
+  <p class="lang"><a href="guide.html">English</a> · <a href="guide-ja.html">日本語</a></p>
+  <p class="back"><a href="index.html">Back to Home</a></p>
+</header>
+
+<nav class="toc">
+  <div class="container">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#menu-bar">Menu Bar</a></li>
+      <li><a href="#clipboard-history">Clipboard History</a></li>
+      <li><a href="#plain-text">Plain Text Mode</a></li>
+      <li><a href="#image-history">Image History</a></li>
+      <li><a href="#snippets">Snippet Management</a></li>
+      <li><a href="#popup">Search Popup</a></li>
+      <li><a href="#hotkeys">Global Hotkeys</a></li>
+      <li><a href="#preferences">Preferences</a></li>
+      <li><a href="#shortcuts">Keyboard Shortcuts</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+
+    <!-- 1. Getting Started -->
+    <section id="getting-started">
+      <h2>1. Getting Started</h2>
+
+      <h3>Installation</h3>
+      <ol>
+        <li>Download <code>copippe-v0.2-macOS.dmg</code> or <code>.zip</code> from <a href="https://github.com/yoshidashingo/copippe/releases/latest">GitHub Releases</a></li>
+        <li>Open the DMG and drag <code>copippe.app</code> to your Applications folder</li>
+        <li>Launch copippe from Applications</li>
+      </ol>
+
+      <div class="tip">
+        <strong>First launch:</strong> macOS will block the app because it is not notarized. Run <code>xattr -cr /Applications/copippe.app</code> in Terminal, or go to <strong>System Settings &rarr; Privacy &amp; Security &rarr; Open Anyway</strong>.
+      </div>
+
+      <h3>System Requirements</h3>
+      <ul>
+        <li>macOS 14 (Sonoma) or later</li>
+        <li>Apple Silicon or Intel Mac</li>
+      </ul>
+
+      <p>Once launched, copippe appears as a clipboard icon in the menu bar. There is no Dock icon — the app runs entirely from the menu bar.</p>
+
+      <figure class="screenshot">
+        <img src="images/menu.png" alt="copippe menu bar dropdown" onerror="this.parentElement.style.display='none'">
+        <figcaption>The copippe menu bar dropdown</figcaption>
+      </figure>
+    </section>
+
+    <!-- 2. Menu Bar -->
+    <section id="menu-bar">
+      <h2>2. Menu Bar</h2>
+      <p>Click the clipboard icon in the menu bar to open the dropdown menu. The icon changes depending on the current mode:</p>
+
+      <table>
+        <tr><th>Icon</th><th>State</th><th>Behavior</th></tr>
+        <tr><td>Filled clipboard</td><td>Active</td><td>Copies are converted to plain text and saved to history</td></tr>
+        <tr><td>Outline clipboard</td><td>Inactive</td><td>Copies are not converted, but still saved to history</td></tr>
+      </table>
+
+      <p>The dropdown menu contains:</p>
+      <ul>
+        <li><strong>Active/Inactive toggle</strong> — Switch plain text mode on or off</li>
+        <li><strong>Clipboard history</strong> — Recent text and image entries</li>
+        <li><strong>Snippet folders</strong> — Expandable submenus with registered snippets</li>
+        <li><strong>Preferences...</strong> — Open the settings window</li>
+        <li><strong>Quit</strong> — Exit the app</li>
+      </ul>
+    </section>
+
+    <!-- 3. Clipboard History -->
+    <section id="clipboard-history">
+      <h2>3. Clipboard History</h2>
+      <p>Every time you copy text or an image, copippe saves it to the history list. You can store up to <strong>30 entries</strong> by default (configurable up to 100 in Preferences).</p>
+
+      <h3>How it works</h3>
+      <ol>
+        <li>Copy something as usual (<span class="kbd">Cmd</span>+<span class="kbd">C</span>)</li>
+        <li>copippe automatically captures it</li>
+        <li>Click the menu bar icon to see your history</li>
+        <li>Click any entry to put it back on your clipboard</li>
+        <li>Paste with <span class="kbd">Cmd</span>+<span class="kbd">V</span></li>
+      </ol>
+
+      <h3>Behavior details</h3>
+      <ul>
+        <li><strong>Deduplication</strong> — If you copy the same text again, the old entry is moved to the top instead of creating a duplicate</li>
+        <li><strong>Empty text is ignored</strong> — Whitespace-only copies are not saved</li>
+        <li><strong>Persistent</strong> — History is saved to disk and restored when the app restarts</li>
+        <li><strong>FIFO</strong> — When the history is full, the oldest entry is removed automatically</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Inactive mode still records:</strong> Even when plain text mode is off, copippe continues to capture clipboard entries to history. Only the text conversion is disabled.
+      </div>
+    </section>
+
+    <!-- 4. Plain Text Mode -->
+    <section id="plain-text">
+      <h2>4. Plain Text Mode</h2>
+      <p>When Active, copippe automatically strips all rich text formatting (HTML, RTF, styles) from copied text and replaces the clipboard content with plain text.</p>
+
+      <h3>What gets stripped</h3>
+      <ul>
+        <li>Font styles (bold, italic, colors, sizes)</li>
+        <li>HTML markup from web pages</li>
+        <li>RTF formatting from documents</li>
+        <li>Any non-text content when text is available</li>
+      </ul>
+
+      <h3>What stays unchanged</h3>
+      <ul>
+        <li>Images — copied images pass through without modification</li>
+        <li>The text content itself — only formatting is removed, not the words</li>
+      </ul>
+
+      <p>Toggle between Active and Inactive from the menu bar dropdown, or use <span class="kbd">Cmd</span>+<span class="kbd">A</span> when the menu is open.</p>
+    </section>
+
+    <!-- 5. Image History -->
+    <section id="image-history">
+      <h2>5. Image History</h2>
+      <p>copippe captures copied images alongside text entries in a unified history list.</p>
+
+      <ul>
+        <li>Images are saved as PNG files in <code>~/Library/Application Support/copippe/images/</code></li>
+        <li>Thumbnails are generated for display in the menu and popup</li>
+        <li>Click an image entry to restore it to the clipboard</li>
+        <li>When an image entry is removed from history, the file is cleaned up automatically</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Search note:</strong> Image entries cannot be searched by text. The search feature only filters text entries.
+      </div>
+    </section>
+
+    <!-- 6. Snippets -->
+    <section id="snippets">
+      <h2>6. Snippet Management</h2>
+      <p>Snippets let you save frequently used text for instant pasting. They are organized in folders.</p>
+
+      <h3>Creating snippets</h3>
+      <ol>
+        <li>Open <strong>Preferences &rarr; Snippets</strong> tab</li>
+        <li>Click <strong>+</strong> under the folder list to create a folder</li>
+        <li>Select the folder, then click <strong>+</strong> under the snippet list</li>
+        <li>Enter a title and content, then click <strong>Save</strong></li>
+      </ol>
+
+      <figure class="screenshot">
+        <img src="images/pref-snippets.png" alt="Snippet management in Preferences" onerror="this.parentElement.style.display='none'">
+        <figcaption>Snippet management in Preferences</figcaption>
+      </figure>
+
+      <h3>Using snippets</h3>
+      <ul>
+        <li><strong>From the menu bar:</strong> Click the copippe icon &rarr; expand a folder submenu &rarr; click a snippet to copy it</li>
+        <li><strong>From the popup:</strong> Press <span class="kbd">Shift</span>+<span class="kbd">Cmd</span>+<span class="kbd">V</span>, switch to the Snippets tab, and click a snippet</li>
+        <li><strong>Via hotkey:</strong> Assign a global hotkey to a snippet in Preferences and press it from any app</li>
+      </ul>
+
+      <h3>Managing snippets</h3>
+      <ul>
+        <li><strong>Edit</strong> — Select a snippet and click the pencil icon</li>
+        <li><strong>Delete</strong> — Select a snippet or folder and click <strong>&minus;</strong></li>
+        <li><strong>Move between folders</strong> — Supported via the Preferences UI</li>
+        <li><strong>Search</strong> — Search by title or content in the popup window</li>
+      </ul>
+
+      <p>Snippet data is stored in <code>~/Library/Application Support/copippe/snippets.json</code>.</p>
+    </section>
+
+    <!-- 7. Popup -->
+    <section id="popup">
+      <h2>7. Search Popup</h2>
+      <p>The floating search popup gives you fast access to your history and snippets from any application.</p>
+
+      <figure class="screenshot">
+        <img src="images/popup.png" alt="Search popup window" onerror="this.parentElement.style.display='none'">
+        <figcaption>The floating search popup with history tab</figcaption>
+      </figure>
+
+      <h3>Opening the popup</h3>
+      <p>Press <span class="kbd">Shift</span>+<span class="kbd">Cmd</span>+<span class="kbd">V</span> from any app. The popup appears as a floating panel that stays on top of other windows.</p>
+
+      <h3>Using the popup</h3>
+      <ol>
+        <li><strong>Search</strong> — Type in the search field to filter entries in real time</li>
+        <li><strong>Switch tabs</strong> — Toggle between History and Snippets using the tab bar</li>
+        <li><strong>Navigate</strong> — Use <span class="kbd">&uarr;</span> / <span class="kbd">&darr;</span> to move between entries</li>
+        <li><strong>Select</strong> — Click an entry or press <span class="kbd">Enter</span> to copy it to the clipboard and close the popup</li>
+        <li><strong>Close</strong> — Press <span class="kbd">Esc</span> or click outside the popup</li>
+      </ol>
+
+      <h3>History tab</h3>
+      <ul>
+        <li>Shows text entries with a preview and image entries with thumbnails</li>
+        <li>Search filters text entries only (images are excluded from search results)</li>
+      </ul>
+
+      <h3>Snippets tab</h3>
+      <ul>
+        <li>Shows all snippets organized by folder when not searching</li>
+        <li>Shows flat search results when a query is entered</li>
+        <li>Displays assigned hotkey badges next to snippets</li>
+      </ul>
+    </section>
+
+    <!-- 8. Hotkeys -->
+    <section id="hotkeys">
+      <h2>8. Global Hotkeys</h2>
+      <p>Global hotkeys work from any application, even when copippe is not in the foreground.</p>
+
+      <h3>Default hotkeys</h3>
+      <table>
+        <tr><th>Shortcut</th><th>Action</th></tr>
+        <tr><td><span class="kbd">Shift</span>+<span class="kbd">Cmd</span>+<span class="kbd">V</span></td><td>Open/close the search popup (History tab)</td></tr>
+      </table>
+
+      <h3>Customizing hotkeys</h3>
+      <ol>
+        <li>Open <strong>Preferences &rarr; Hotkeys</strong> tab</li>
+        <li>Click the recorder button next to the action</li>
+        <li>Press your desired key combination</li>
+        <li>If a conflict is detected, you will be warned</li>
+      </ol>
+
+      <figure class="screenshot">
+        <img src="images/pref-hotkeys.png" alt="Hotkey configuration" onerror="this.parentElement.style.display='none'">
+        <figcaption>Hotkey configuration in Preferences</figcaption>
+      </figure>
+
+      <h3>Per-snippet hotkeys</h3>
+      <p>You can assign a unique global hotkey to any snippet. When pressed, the snippet's content is immediately copied to the clipboard — no popup needed.</p>
+      <p>Set per-snippet hotkeys in <strong>Preferences &rarr; Snippets</strong> when editing a snippet.</p>
+
+      <div class="tip">
+        <strong>Accessibility permission:</strong> macOS may ask you to grant accessibility access the first time you use global hotkeys. Go to <strong>System Settings &rarr; Privacy &amp; Security &rarr; Accessibility</strong> and enable copippe.
+      </div>
+    </section>
+
+    <!-- 9. Preferences -->
+    <section id="preferences">
+      <h2>9. Preferences</h2>
+      <p>Open from the menu bar dropdown by clicking <strong>Preferences...</strong> (<span class="kbd">Cmd</span>+<span class="kbd">,</span>).</p>
+
+      <figure class="screenshot">
+        <img src="images/pref-general.png" alt="Preferences - General tab" onerror="this.parentElement.style.display='none'">
+        <figcaption>General tab in Preferences</figcaption>
+      </figure>
+
+      <h3>General tab</h3>
+      <table>
+        <tr><th>Setting</th><th>Description</th><th>Default</th></tr>
+        <tr><td>History limit</td><td>Maximum number of clipboard entries to keep (5&ndash;100)</td><td>30</td></tr>
+        <tr><td>Plain text mode by default</td><td>Whether Active mode is on when the app starts</td><td>On</td></tr>
+        <tr><td>Launch at login</td><td>Automatically start copippe when you log in</td><td>On</td></tr>
+      </table>
+
+      <h3>Hotkeys tab</h3>
+      <p>Configure the global keyboard shortcut to open the search popup. See <a href="#hotkeys">Global Hotkeys</a> for details.</p>
+
+      <h3>Snippets tab</h3>
+      <p>Manage folders and snippets. See <a href="#snippets">Snippet Management</a> for details.</p>
+    </section>
+
+    <!-- 10. Shortcuts -->
+    <section id="shortcuts">
+      <h2>10. Keyboard Shortcuts</h2>
+
+      <h3>Global (works from any app)</h3>
+      <table>
+        <tr><th>Shortcut</th><th>Action</th></tr>
+        <tr><td><span class="kbd">Shift</span>+<span class="kbd">Cmd</span>+<span class="kbd">V</span></td><td>Open/close search popup</td></tr>
+        <tr><td>Custom per-snippet hotkeys</td><td>Paste specific snippet to clipboard</td></tr>
+      </table>
+
+      <h3>Menu bar dropdown (when open)</h3>
+      <table>
+        <tr><th>Shortcut</th><th>Action</th></tr>
+        <tr><td><span class="kbd">Cmd</span>+<span class="kbd">A</span></td><td>Toggle Active/Inactive</td></tr>
+        <tr><td><span class="kbd">Cmd</span>+<span class="kbd">,</span></td><td>Open Preferences</td></tr>
+        <tr><td><span class="kbd">Cmd</span>+<span class="kbd">Q</span></td><td>Quit</td></tr>
+      </table>
+
+      <h3>Search popup (when open)</h3>
+      <table>
+        <tr><th>Shortcut</th><th>Action</th></tr>
+        <tr><td><span class="kbd">&uarr;</span> / <span class="kbd">&darr;</span></td><td>Navigate entries</td></tr>
+        <tr><td><span class="kbd">Enter</span></td><td>Select entry and paste to clipboard</td></tr>
+        <tr><td><span class="kbd">Esc</span></td><td>Close popup</td></tr>
+        <tr><td>Type in search field</td><td>Filter entries in real time</td></tr>
+      </table>
+    </section>
+
+    <!-- 11. Troubleshooting -->
+    <section id="troubleshooting">
+      <h2>11. Troubleshooting</h2>
+
+      <h3>App is blocked on first launch</h3>
+      <p>copippe is not notarized by Apple. Run the following command in Terminal:</p>
+      <pre><code>xattr -cr /Applications/copippe.app</code></pre>
+      <p>Or go to <strong>System Settings &rarr; Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>.</p>
+
+      <h3>Global hotkeys don't work</h3>
+      <ul>
+        <li>Make sure copippe has <strong>Accessibility</strong> permission: System Settings &rarr; Privacy &amp; Security &rarr; Accessibility</li>
+        <li>Check for conflicts with other apps using the same key combination</li>
+        <li>Try setting a different hotkey in Preferences &rarr; Hotkeys</li>
+      </ul>
+
+      <h3>History is not being captured</h3>
+      <ul>
+        <li>Make sure copippe is running (check for the clipboard icon in the menu bar)</li>
+        <li>copippe captures clipboard changes via polling — there may be a short delay (up to 0.5 seconds)</li>
+      </ul>
+
+      <h3>Data locations</h3>
+      <table>
+        <tr><th>Data</th><th>Path</th></tr>
+        <tr><td>Clipboard history</td><td><code>~/Library/Application Support/copippe/history.json</code></td></tr>
+        <tr><td>Snippets</td><td><code>~/Library/Application Support/copippe/snippets.json</code></td></tr>
+        <tr><td>Saved images</td><td><code>~/Library/Application Support/copippe/images/</code></td></tr>
+        <tr><td>App settings</td><td>macOS UserDefaults (<code>com.copippe.app</code>)</td></tr>
+      </table>
+    </section>
+
+  </div>
+</article>
+
+<footer>
+  <a href="index.html">Home</a> ·
+  <a href="https://github.com/yoshidashingo/copippe">GitHub</a> ·
+  <a href="https://github.com/yoshidashingo/copippe/releases">Releases</a> ·
+  MIT License
+</footer>
+
+</body>
+</html>
