@@ -11,7 +11,7 @@ final class HotkeyManager {
 
     private static let defaultHistoryHotkey = HotkeyBinding(
         keyCode: UInt16(kVK_ANSI_V),
-        modifiers: NSEvent.ModifierFlags([.shift, .command]).rawValue
+        modifiers: NSEvent.ModifierFlags([.control, .option]).rawValue
     )
 
     init() {

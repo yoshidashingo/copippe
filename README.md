@@ -36,7 +36,7 @@
 - **Menu Bar Access** — Quickly paste snippets from the menu bar dropdown via folder submenus
 
 ### Search & Quick Access
-- **Global Hotkey** — Press Shift+Cmd+V from any app to open the floating search popup
+- **Global Hotkey** — Press Ctrl+Option+V from any app to open the floating search popup
 - **Popup Window** — A floating panel with incremental search across history and snippets, keyboard navigation, and tab switching
 - **Per-Snippet Hotkeys** — Assign individual global hotkeys to paste specific snippets instantly
 
@@ -79,7 +79,7 @@
 4. **History** — Click any history entry (text or image) to copy it back to your clipboard, then paste with ⌘V
 5. **Snippets** — Expand folder submenus to paste registered snippets
 6. **Preferences** — Open the settings window to configure hotkeys, history limit, and manage snippets
-7. **Shift+Cmd+V** — Open the floating popup from any app to search history and snippets
+7. **Ctrl+Option+V** — Open the floating popup from any app to search history and snippets
 8. **Clear History** — Remove all saved entries
 9. **Quit** — Exit the app
 
@@ -94,7 +94,7 @@
 
 | Shortcut | Action |
 |----------|--------|
-| Shift+Cmd+V | Open history/snippet popup |
+| Ctrl+Option+V | Open history/snippet popup |
 | Esc | Close popup |
 | Up/Down | Navigate popup items |
 | Enter | Select and paste |
