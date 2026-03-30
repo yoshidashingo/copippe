@@ -18,6 +18,7 @@ final class PopupWindowController {
         if let panel = panel {
             panel.orderFront(nil)
             panel.makeKey()
+            NSApp.activate(ignoringOtherApps: true)
             return
         }
 
@@ -43,6 +44,7 @@ final class PopupWindowController {
         panel.contentView = NSHostingView(rootView: contentView)
         panel.center()
         panel.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
 
         self.panel = panel
     }

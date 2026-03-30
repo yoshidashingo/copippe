@@ -21,6 +21,13 @@ final class HotkeyManager {
     func start() {
         stop()
 
+        // Request accessibility permission if not granted
+        if !AXIsProcessTrusted() {
+            let promptKey = "AXTrustedCheckOptionPrompt" as CFString
+            let options = [promptKey: true] as CFDictionary
+            AXIsProcessTrustedWithOptions(options)
+        }
+
         // Register default hotkeys if none exist
         if registeredHotkeys[.showHistory] == nil {
             registeredHotkeys[.showHistory] = Self.defaultHistoryHotkey
