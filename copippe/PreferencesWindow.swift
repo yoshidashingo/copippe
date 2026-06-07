@@ -150,17 +150,25 @@ struct SnippetTab: View {
     let snippetManager: SnippetManager
     @State private var selectedFolderID: UUID?
     @State private var selectedSnippetID: UUID?
+    @State private var renamingFolderID: UUID?
+    @State private var folderNameDraft = ""
     @State private var isEditingSnippet = false
     @State private var editTitle = ""
     @State private var editContent = ""
+    @FocusState private var isFolderNameFieldFocused: Bool
 
     var body: some View {
         HSplitView {
             // Left pane: Folders
             VStack(alignment: .leading, spacing: 0) {
                 List(snippetManager.folders, selection: $selectedFolderID) { folder in
-                    Text(folder.name)
+                    folderRow(folder)
                         .tag(folder.id)
+                        .contextMenu {
+                            Button("Rename") {
+                                startRenamingFolder(folder)
+                            }
+                        }
                 }
                 .listStyle(.sidebar)
 
@@ -168,15 +176,20 @@ struct SnippetTab: View {
 
                 HStack(spacing: 4) {
                     Button {
-                        snippetManager.addFolder(name: "New Folder")
+                        let folder = snippetManager.addFolder()
+                        startRenamingFolder(folder)
                     } label: {
                         Image(systemName: "plus")
                     }
                     .buttonStyle(.borderless)
+                    .help("Add Folder")
 
                     Button {
                         if let id = selectedFolderID {
                             snippetManager.deleteFolder(id: id)
+                            if renamingFolderID == id {
+                                cancelFolderRename()
+                            }
                             selectedFolderID = nil
                         }
                     } label: {
@@ -184,6 +197,18 @@ struct SnippetTab: View {
                     }
                     .buttonStyle(.borderless)
                     .disabled(selectedFolderID == nil)
+                    .help("Delete Folder")
+
+                    Button {
+                        guard let id = selectedFolderID,
+                              let folder = snippetManager.folders.first(where: { $0.id == id }) else { return }
+                        startRenamingFolder(folder)
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(selectedFolderID == nil)
+                    .help("Rename Folder")
 
                     Spacer()
                 }
@@ -288,5 +313,64 @@ struct SnippetTab: View {
             }
             .frame(minWidth: 250)
         }
+    }
+
+    @ViewBuilder
+    private func folderRow(_ folder: SnippetFolder) -> some View {
+        if renamingFolderID == folder.id {
+            HStack(spacing: 4) {
+                TextField("Folder name", text: $folderNameDraft)
+                    .textFieldStyle(.plain)
+                    .focused($isFolderNameFieldFocused)
+                    .onSubmit {
+                        commitFolderRename()
+                    }
+                    .onExitCommand {
+                        cancelFolderRename()
+                    }
+
+                Button {
+                    commitFolderRename()
+                } label: {
+                    Image(systemName: "checkmark")
+                }
+                .buttonStyle(.borderless)
+                .help("Save Folder Name")
+
+                Button {
+                    cancelFolderRename()
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                .buttonStyle(.borderless)
+                .help("Cancel Rename")
+            }
+        } else {
+            Text(folder.name)
+        }
+    }
+
+    private func startRenamingFolder(_ folder: SnippetFolder) {
+        selectedFolderID = folder.id
+        renamingFolderID = folder.id
+        folderNameDraft = folder.name
+        DispatchQueue.main.async {
+            isFolderNameFieldFocused = true
+        }
+    }
+
+    private func commitFolderRename() {
+        guard let id = renamingFolderID else { return }
+        let trimmedName = folderNameDraft.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedName.isEmpty {
+            snippetManager.renameFolder(id: id, name: trimmedName)
+        }
+        cancelFolderRename()
+    }
+
+    private func cancelFolderRename() {
+        renamingFolderID = nil
+        folderNameDraft = ""
+        isFolderNameFieldFocused = false
     }
 }

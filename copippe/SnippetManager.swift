@@ -4,9 +4,16 @@ import Observation
 
 @Observable
 final class SnippetManager {
+    static let defaultFolderName = "New Folder"
+    private static let legacyDefaultFolderName = "New Name"
+
     private(set) var folders: [SnippetFolder] = []
+    private let storageFileURL: URL?
 
     private var fileURL: URL {
+        if let storageFileURL {
+            return storageFileURL
+        }
         let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? FileManager.default.temporaryDirectory
         let appDir = container.appendingPathComponent("copippe", isDirectory: true)
@@ -14,14 +21,15 @@ final class SnippetManager {
         return appDir.appendingPathComponent("snippets.json")
     }
 
-    init() {
+    init(fileURL: URL? = nil) {
+        self.storageFileURL = fileURL
         load()
     }
 
     // MARK: - Folder Operations
 
     @discardableResult
-    func addFolder(name: String) -> SnippetFolder {
+    func addFolder(name: String = SnippetManager.defaultFolderName) -> SnippetFolder {
         let folder = SnippetFolder(name: name)
         folders.append(folder)
         save()
@@ -156,6 +164,10 @@ final class SnippetManager {
     func save() {
         do {
             let data = try JSONEncoder().encode(folders)
+            try FileManager.default.createDirectory(
+                at: fileURL.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
             try data.write(to: fileURL, options: .atomic)
         } catch {
             // Best-effort persistence
@@ -166,8 +178,21 @@ final class SnippetManager {
         do {
             let data = try Data(contentsOf: fileURL)
             folders = try JSONDecoder().decode([SnippetFolder].self, from: data)
+            migrateLegacyDefaultFolderNames()
         } catch {
             folders = []
+        }
+    }
+
+    private func migrateLegacyDefaultFolderNames() {
+        var didMigrate = false
+        for index in folders.indices
+        where folders[index].name == Self.legacyDefaultFolderName && folders[index].snippets.isEmpty {
+            folders[index].name = Self.defaultFolderName
+            didMigrate = true
+        }
+        if didMigrate {
+            save()
         }
     }
 }

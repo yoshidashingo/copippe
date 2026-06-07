@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import copippe
 
@@ -5,12 +6,12 @@ import Testing
 struct SnippetManagerTests {
 
     private func makeManager() -> SnippetManager {
-        let manager = SnippetManager()
-        // Clear all folders
-        while !manager.folders.isEmpty {
-            manager.deleteFolder(id: manager.folders[0].id)
-        }
-        return manager
+        SnippetManager(fileURL: temporarySnippetsURL())
+    }
+
+    private func temporarySnippetsURL() -> URL {
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("copippe-tests-\(UUID().uuidString).json")
     }
 
     @Test("Add folder")
@@ -23,6 +24,17 @@ struct SnippetManagerTests {
         #expect(manager.folders[0].id == folder.id)
     }
 
+    @Test("Add folder uses shared default name")
+    func addFolderUsesDefaultName() {
+        let manager = makeManager()
+
+        let folder = manager.addFolder()
+
+        #expect(folder.name == SnippetManager.defaultFolderName)
+        #expect(folder.name == "New Folder")
+        #expect(manager.folders[0].name == SnippetManager.defaultFolderName)
+    }
+
     @Test("Rename folder")
     func renameFolder() {
         let manager = makeManager()
@@ -31,6 +43,53 @@ struct SnippetManagerTests {
         manager.renameFolder(id: folder.id, name: "New Name")
 
         #expect(manager.folders[0].name == "New Name")
+    }
+
+    @Test("Managers can use isolated storage files")
+    func managersCanUseIsolatedStorageFiles() {
+        let firstURL = temporarySnippetsURL()
+        let secondURL = temporarySnippetsURL()
+        let firstManager = SnippetManager(fileURL: firstURL)
+        let secondManager = SnippetManager(fileURL: secondURL)
+
+        firstManager.addFolder(name: "First")
+        secondManager.addFolder(name: "Second")
+
+        #expect(SnippetManager(fileURL: firstURL).folders.map(\.name) == ["First"])
+        #expect(SnippetManager(fileURL: secondURL).folders.map(\.name) == ["Second"])
+    }
+
+    @Test("Load migrates empty legacy default folder name")
+    func loadMigratesEmptyLegacyDefaultFolderName() throws {
+        let fileURL = temporarySnippetsURL()
+        let legacyFolders = [SnippetFolder(name: "New Name")]
+        let data = try JSONEncoder().encode(legacyFolders)
+        try data.write(to: fileURL)
+
+        let manager = SnippetManager(fileURL: fileURL)
+
+        #expect(manager.folders.map(\.name) == [SnippetManager.defaultFolderName])
+
+        let persistedData = try Data(contentsOf: fileURL)
+        let persistedFolders = try JSONDecoder().decode([SnippetFolder].self, from: persistedData)
+        #expect(persistedFolders.map(\.name) == [SnippetManager.defaultFolderName])
+    }
+
+    @Test("Load preserves non-empty legacy-named folders")
+    func loadPreservesNonEmptyLegacyNamedFolders() throws {
+        let fileURL = temporarySnippetsURL()
+        let legacyFolders = [
+            SnippetFolder(
+                name: "New Name",
+                snippets: [Snippet(title: "Saved Snippet", content: "Keep this folder name")]
+            )
+        ]
+        let data = try JSONEncoder().encode(legacyFolders)
+        try data.write(to: fileURL)
+
+        let manager = SnippetManager(fileURL: fileURL)
+
+        #expect(manager.folders.map(\.name) == ["New Name"])
     }
 
     @Test("Delete folder")
