@@ -53,8 +53,8 @@
 ## インストール
 
 1. **[Releases ページ](https://github.com/yoshidashingo/copippe/releases/latest)** から最新版をダウンロード:
-   - [`copippe-v0.2-macOS.zip`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.2-macOS.zip) — Zipアーカイブ
-   - [`copippe-v0.2-macOS.dmg`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.2-macOS.dmg) — ディスクイメージ
+   - `copippe-vX.Y-macOS.zip` — Zipアーカイブ
+   - `copippe-vX.Y-macOS.dmg` — ディスクイメージ
 2. `.zip` または `.dmg` を開き、`copippe.app` をアプリケーションフォルダに移動
 3. copippeを起動
 

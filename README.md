@@ -53,8 +53,8 @@
 ## Installation
 
 1. Download the latest version from the **[Releases page](https://github.com/yoshidashingo/copippe/releases/latest)**:
-   - [`copippe-v0.2-macOS.zip`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.2-macOS.zip) — Zip archive
-   - [`copippe-v0.2-macOS.dmg`](https://github.com/yoshidashingo/copippe/releases/latest/download/copippe-v0.2-macOS.dmg) — Disk image
+   - `copippe-vX.Y-macOS.zip` — Zip archive
+   - `copippe-vX.Y-macOS.dmg` — Disk image
 2. Open the `.zip` or `.dmg` and move `copippe.app` to your Applications folder
 3. Launch copippe
 
