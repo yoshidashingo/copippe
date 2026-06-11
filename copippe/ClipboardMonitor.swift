@@ -65,7 +65,7 @@ final class ClipboardMonitor {
         }
     }
 
-    private func extractImage(from pasteboard: NSPasteboard) -> NSImage? {
+    func extractImage(from pasteboard: NSPasteboard) -> NSImage? {
         // Check for image types
         let imageTypes: [NSPasteboard.PasteboardType] = [.tiff, .png]
         for type in imageTypes {
@@ -78,7 +78,7 @@ final class ClipboardMonitor {
         return nil
     }
 
-    private func convertToPlainText(from pasteboard: NSPasteboard) -> String? {
+    func convertToPlainText(from pasteboard: NSPasteboard) -> String? {
         if let string = pasteboard.string(forType: .string) {
             return string
         }

@@ -31,6 +31,7 @@
 		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
 		A10046 /* PopupContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* PopupContentView.swift */; };
 		A10047 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* Logging.swift */; };
+		A10048 /* ClipboardMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10048 /* ClipboardMonitorTests.swift */; };
 		A10041 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* PreferencesView.swift */; };
 		A10042 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* GeneralTab.swift */; };
 		A10043 /* HotkeyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10043 /* HotkeyTab.swift */; };
@@ -77,6 +78,7 @@
 		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
 		B10046 /* PopupContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContentView.swift; sourceTree = "<group>"; };
 		B10047 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		B10048 /* ClipboardMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitorTests.swift; sourceTree = "<group>"; };
 		B10041 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		B10042 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
 		B10043 /* HotkeyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyTab.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				B10036 /* PersistenceTests.swift */,
 				B10038 /* PasteboardTests.swift */,
 				B10040 /* StringPreviewTests.swift */,
+				B10048 /* ClipboardMonitorTests.swift */,
 			);
 			path = copippeTests;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				A10036 /* PersistenceTests.swift in Sources */,
 				A10038 /* PasteboardTests.swift in Sources */,
 				A10040 /* StringPreviewTests.swift in Sources */,
+				A10048 /* ClipboardMonitorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
