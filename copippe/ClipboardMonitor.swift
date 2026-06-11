@@ -6,7 +6,6 @@ import Observation
 final class ClipboardMonitor {
     private var timer: Timer?
     private var lastChangeCount: Int = 0
-    private var isUpdatingClipboard = false
 
     private let appState: AppState
     private let historyManager: HistoryManager
@@ -37,8 +36,6 @@ final class ClipboardMonitor {
         guard currentCount != lastChangeCount else { return }
         lastChangeCount = currentCount
 
-        guard !isUpdatingClipboard else { return }
-
         handleClipboardChange()
     }
 
@@ -60,12 +57,10 @@ final class ClipboardMonitor {
 
         // Write plain text back to clipboard only when active
         if appState.isActive {
-            isUpdatingClipboard = true
             let pb = NSPasteboard.general
             pb.clearContents()
             pb.setString(plainText, forType: .string)
             lastChangeCount = pb.changeCount
-            isUpdatingClipboard = false
         }
     }
 
