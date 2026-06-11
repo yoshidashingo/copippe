@@ -29,7 +29,10 @@
 		A10039 /* StringPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10039 /* StringPreview.swift */; };
 		A10040 /* StringPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* StringPreviewTests.swift */; };
 		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
-		A10026 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* PreferencesWindow.swift */; };
+		A10041 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* PreferencesView.swift */; };
+		A10042 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* GeneralTab.swift */; };
+		A10043 /* HotkeyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10043 /* HotkeyTab.swift */; };
+		A10044 /* SnippetTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044 /* SnippetTab.swift */; };
 		A10035 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +72,10 @@
 		B10039 /* StringPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPreview.swift; sourceTree = "<group>"; };
 		B10040 /* StringPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPreviewTests.swift; sourceTree = "<group>"; };
 		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
-		B10026 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		B10041 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		B10042 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
+		B10043 /* HotkeyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyTab.swift; sourceTree = "<group>"; };
+		B10044 /* SnippetTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetTab.swift; sourceTree = "<group>"; };
 		B10035 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +119,10 @@
 				B10023 /* SnippetManager.swift */,
 				B10024 /* HotkeyManager.swift */,
 				B10025 /* PopupWindow.swift */,
-				B10026 /* PreferencesWindow.swift */,
+				B10041 /* PreferencesView.swift */,
+				B10042 /* GeneralTab.swift */,
+				B10043 /* HotkeyTab.swift */,
+				B10044 /* SnippetTab.swift */,
 				B10035 /* Persistence.swift */,
 				B10037 /* Pasteboard.swift */,
 				B10039 /* StringPreview.swift */,
@@ -250,7 +259,10 @@
 				A10023 /* SnippetManager.swift in Sources */,
 				A10024 /* HotkeyManager.swift in Sources */,
 				A10025 /* PopupWindow.swift in Sources */,
-				A10026 /* PreferencesWindow.swift in Sources */,
+				A10041 /* PreferencesView.swift in Sources */,
+				A10042 /* GeneralTab.swift in Sources */,
+				A10043 /* HotkeyTab.swift in Sources */,
+				A10044 /* SnippetTab.swift in Sources */,
 				A10035 /* Persistence.swift in Sources */,
 				A10037 /* Pasteboard.swift in Sources */,
 				A10039 /* StringPreview.swift in Sources */,
