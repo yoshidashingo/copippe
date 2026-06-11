@@ -29,7 +29,7 @@ struct MenuView: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
             } else {
-                ForEach(Array(historyManager.entries.enumerated()), id: \.offset) { index, entry in
+                ForEach(Array(historyManager.entries.enumerated()), id: \.element.id) { index, entry in
                     Button {
                         historyManager.copyToClipboard(at: index)
                     } label: {
