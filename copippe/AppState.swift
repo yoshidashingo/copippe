@@ -5,7 +5,6 @@ import Observation
 final class AppState {
     private static let isActiveKey = "copippe_isActive"
     private static let maxHistoryCountKey = "copippe_maxHistoryCount"
-    private static let defaultPlainTextModeKey = "copippe_defaultPlainTextMode"
 
     @ObservationIgnored private let defaults: UserDefaults
 
@@ -18,12 +17,6 @@ final class AppState {
     var maxHistoryCount: Int {
         didSet {
             defaults.set(maxHistoryCount, forKey: Self.maxHistoryCountKey)
-        }
-    }
-
-    var defaultPlainTextMode: Bool {
-        didSet {
-            defaults.set(defaultPlainTextMode, forKey: Self.defaultPlainTextModeKey)
         }
     }
 
@@ -46,13 +39,6 @@ final class AppState {
             self.maxHistoryCount = defaults.integer(forKey: Self.maxHistoryCountKey)
         }
 
-        // Default plain text mode: true
-        if defaults.object(forKey: Self.defaultPlainTextModeKey) == nil {
-            self.defaultPlainTextMode = true
-            defaults.set(true, forKey: Self.defaultPlainTextModeKey)
-        } else {
-            self.defaultPlainTextMode = defaults.bool(forKey: Self.defaultPlainTextModeKey)
-        }
     }
 
     func toggleActivation() {

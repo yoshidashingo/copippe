@@ -44,14 +44,6 @@ struct GeneralTab: View {
                     ),
                     in: 5...100
                 )
-
-                Toggle(
-                    "Plain text mode by default",
-                    isOn: Binding(
-                        get: { appState.defaultPlainTextMode },
-                        set: { appState.defaultPlainTextMode = $0 }
-                    )
-                )
             }
 
             Section("Startup") {

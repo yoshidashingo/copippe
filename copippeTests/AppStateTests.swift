@@ -54,17 +54,4 @@ struct AppStateTests {
         #expect(testDefaults.defaults.integer(forKey: "copippe_maxHistoryCount") == 50)
     }
 
-    @Test("Default plain text mode defaults to true")
-    func defaultPlainTextModeDefault() {
-        let state = makeState()
-        #expect(state.defaultPlainTextMode == true)
-    }
-
-    @Test("Default plain text mode persists to UserDefaults")
-    func defaultPlainTextModePersistence() {
-        let state = makeState()
-
-        state.defaultPlainTextMode = false
-        #expect(testDefaults.defaults.bool(forKey: "copippe_defaultPlainTextMode") == false)
-    }
 }
