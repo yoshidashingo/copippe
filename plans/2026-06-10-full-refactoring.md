@@ -10,6 +10,30 @@
 
 ---
 
+## 進捗状況(2026-06-11 中断時点)— 再開者は必ずここから読むこと
+
+**次の作業: Task 4.2(Pasteboard ヘルパー)から再開する。**
+
+| フェーズ | 状態 | コミット |
+|---------|------|---------|
+| Phase 0(テスト隔離) | ✅ 完了 | 3b3090a, 8a841e3, 97c661f |
+| Phase 1(リポジトリ衛生) | ✅ 完了 | 2ced0f7, be26221, 9780f7c |
+| Phase 2(バグ修正 B1/B2/B5/B6) | ✅ 完了 | 23b8ae7, bf1d3c6, b18958f, b9e90c8 |
+| Phase 3(デッドコード D1〜D10) | ✅ 完了 | b9b9d9b, c8bdf58, e025a3f, da9f500, 81739d7, f0ebc9e |
+| Phase 4(共通化) | ⏸ **Task 4.1 のみ完了**(dcfba06)。4.2〜4.5 が残り | dcfba06 |
+| Phase 5〜8 | 未着手 | — |
+
+### 再開時に知っておくべきこと
+
+1. **プッシュは未実施。** 上記 17 実装コミット + プランコミット(40027eb)はローカル main のみ。方針: 全フェーズ完了 → コード変更全体の Red Team レビュー収束 → push(AGENTS.md の作業ルールどおり)。
+2. **pbxproj 採番の消費状況**: `A10034`/`B10034` = TestSupport.swift(test)、`A10035`/`B10035` = Persistence.swift(app)、`A10036`/`B10036` = PersistenceTests.swift(test)。**次の空きは `A10037`/`B10037`**(Task 4.2 の Pasteboard.swift から使う)。
+3. **テスト実行は安全になった**(Phase 0 完了により本番データ・実設定を破壊しない)。残留物もゼロ(TestDefaults が removePersistentDomain → synchronize → removeItem で掃除する — 根拠は Task 0.3 の「実装時の知見」)。
+4. **本番データのバックアップ**が `~/copippe-backup-20260611/` にある(Phase 0 のベースラインテストが旧テストコードで本番 history.json を破壊したため取得・復元済み。Phase 8 完了後に不要なら削除してよい)。
+5. **手動検証の未消化分**は Phase 8 のスモークテストに集約してある: Task 2.1(Launch at login オフが再起動後も維持)、Task 2.3(ポップアップ開閉の回帰)、Task 3.6(ホットキー変更・Escape キャンセル・競合アラート)。
+6. 検証コマンド: `xcodebuild test -project copippe.xcodeproj -scheme copippe -destination 'platform=macOS'`(全テスト)、`xcodebuild build-for-testing ...`(両ターゲットのコンパイルのみ)。中断時点で全テスト green。
+
+---
+
 ## 0. 現状分析(全問題リストと根拠)
 
 2026-06-10 時点の全ソース(本体 11 ファイル約 1,400 行、テスト 5 ファイル約 600 行)を読了して特定した問題。**ID はプラン全体で参照する。**
