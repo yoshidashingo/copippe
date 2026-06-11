@@ -67,7 +67,7 @@ final class SnippetManager {
         return snippet
     }
 
-    func updateSnippet(id: UUID, title: String? = nil, content: String? = nil, hotkey: HotkeyBinding? = nil) {
+    func updateSnippet(id: UUID, title: String? = nil, content: String? = nil) {
         for folderIndex in folders.indices {
             if let snippetIndex = folders[folderIndex].snippets.firstIndex(where: { $0.id == id }) {
                 if let title = title {
@@ -76,8 +76,6 @@ final class SnippetManager {
                 if let content = content {
                     folders[folderIndex].snippets[snippetIndex].content = content
                 }
-                // hotkey can be set to nil to clear, so we handle it separately
-                folders[folderIndex].snippets[snippetIndex].hotkey = hotkey
                 save()
                 return
             }

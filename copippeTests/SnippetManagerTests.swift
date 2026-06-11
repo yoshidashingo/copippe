@@ -128,6 +128,20 @@ struct SnippetManagerTests {
         #expect(manager.folders[0].snippets[0].content == "New Content")
     }
 
+    @Test("Update snippet preserves existing hotkey")
+    func updateSnippetPreservesHotkey() {
+        let manager = makeManager()
+
+        let folder = manager.addFolder(name: "Folder")
+        let snippet = manager.addSnippet(folderID: folder.id, title: "Title", content: "Content")!
+        let binding = HotkeyBinding(keyCode: 9, modifiers: 0)
+        manager.setSnippetHotkey(id: snippet.id, hotkey: binding)
+
+        manager.updateSnippet(id: snippet.id, title: "New Title", content: "New Content")
+
+        #expect(manager.folders[0].snippets[0].hotkey == binding)
+    }
+
     @Test("Delete snippet")
     func deleteSnippet() {
         let manager = makeManager()
