@@ -26,6 +26,8 @@
 		A10036 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036 /* PersistenceTests.swift */; };
 		A10037 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10037 /* Pasteboard.swift */; };
 		A10038 /* PasteboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10038 /* PasteboardTests.swift */; };
+		A10039 /* StringPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10039 /* StringPreview.swift */; };
+		A10040 /* StringPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* StringPreviewTests.swift */; };
 		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
 		A10026 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* PreferencesWindow.swift */; };
 		A10035 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* Persistence.swift */; };
@@ -64,6 +66,8 @@
 		B10036 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		B10037 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		B10038 /* PasteboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardTests.swift; sourceTree = "<group>"; };
+		B10039 /* StringPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPreview.swift; sourceTree = "<group>"; };
+		B10040 /* StringPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPreviewTests.swift; sourceTree = "<group>"; };
 		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
 		B10026 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		B10035 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				B10026 /* PreferencesWindow.swift */,
 				B10035 /* Persistence.swift */,
 				B10037 /* Pasteboard.swift */,
+				B10039 /* StringPreview.swift */,
 				B10006 /* Assets.xcassets */,
 				B10007 /* copippe.entitlements */,
 			);
@@ -129,6 +134,7 @@
 				B10034 /* TestSupport.swift */,
 				B10036 /* PersistenceTests.swift */,
 				B10038 /* PasteboardTests.swift */,
+				B10040 /* StringPreviewTests.swift */,
 			);
 			path = copippeTests;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 				A10026 /* PreferencesWindow.swift in Sources */,
 				A10035 /* Persistence.swift in Sources */,
 				A10037 /* Pasteboard.swift in Sources */,
+				A10039 /* StringPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 				A10034 /* TestSupport.swift in Sources */,
 				A10036 /* PersistenceTests.swift in Sources */,
 				A10038 /* PasteboardTests.swift in Sources */,
+				A10040 /* StringPreviewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

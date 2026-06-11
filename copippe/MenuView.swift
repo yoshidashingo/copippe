@@ -94,7 +94,7 @@ struct MenuView: View {
     private func historyEntryLabel(_ entry: HistoryEntry) -> some View {
         switch entry {
         case .text(_, let string):
-            Text(previewText(string))
+            Text(string.singleLinePreview(maxLength: 50))
                 .lineLimit(1)
                 .truncationMode(.tail)
         case .image(_, let imageID):
@@ -111,13 +111,5 @@ struct MenuView: View {
                     .foregroundStyle(.secondary)
             }
         }
-    }
-
-    private func previewText(_ text: String) -> String {
-        let singleLine = text.replacingOccurrences(of: "\n", with: " ")
-        if singleLine.count > 50 {
-            return String(singleLine.prefix(50)) + "..."
-        }
-        return singleLine
     }
 }

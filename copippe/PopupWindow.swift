@@ -167,7 +167,7 @@ struct PopupContentView: View {
                 Image(systemName: "doc.text")
                     .foregroundStyle(.secondary)
                     .frame(width: 20)
-                Text(previewText(string))
+                Text(string.singleLinePreview(maxLength: 80))
                     .lineLimit(2)
                     .font(.system(size: 13))
 
@@ -270,14 +270,6 @@ struct PopupContentView: View {
     }
 
     // MARK: - Helpers
-
-    private func previewText(_ text: String) -> String {
-        let singleLine = text.replacingOccurrences(of: "\n", with: " ")
-        if singleLine.count > 80 {
-            return String(singleLine.prefix(80)) + "..."
-        }
-        return singleLine
-    }
 
     private func emptyView(_ message: String) -> some View {
         VStack {
