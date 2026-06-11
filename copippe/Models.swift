@@ -93,7 +93,7 @@ enum HotkeyAction: Codable, Equatable, Hashable {
 
 // MARK: - Popup
 
-enum PopupTab: Int, CaseIterable {
+enum PopupTab {
     case history
     case snippets
 }
