@@ -329,7 +329,9 @@ final class TestDefaults {
 
     deinit {
         defaults.removePersistentDomain(forName: suiteName)
-        // removePersistentDomain は内容を消すが、cfprefsd が空の plist ファイルを残すため直接削除する
+        // synchronize で cfprefsd の保留書き込みを確定させてからファイルを消す。
+        // これを挟まないと、削除後に空の plist が非同期で書き出されて残留する。
+        defaults.synchronize()
         let plistURL = FileManager.default
             .urls(for: .libraryDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Preferences/\(suiteName).plist")
@@ -338,7 +340,7 @@ final class TestDefaults {
 }
 ```
 
-実装時の知見(2026-06-11 実測): `removePersistentDomain` 単独ではドメイン内容はクリアされるものの、cfprefsd が空の plist ファイル(42 バイトの `{}`)を `~/Library/Preferences/` に残す。上記のとおりファイル削除まで行うことで残留ゼロになることを確認済み。
+実装時の知見(2026-06-11 実測): (1) `removePersistentDomain` 単独ではドメイン内容はクリアされるが、cfprefsd が空の plist(42 バイトの `{}`)を `~/Library/Preferences/` に残す。(2) `removeItem` を足しても、cfprefsd の非同期書き出しと競合すると削除後に空 plist が復活する(18/24 件残留を観測)。(3) `removePersistentDomain → synchronize() → removeItem` の順で確定的に残留ゼロになることを 6 秒待機後の実測で確認済み。
 
 - [ ] **Step 3: TestSupport.swift を pbxproj の**テストターゲット**に登録する(付録 A の「追加」手順。グループは `G10003 /* copippeTests */`、Sources はテストターゲット側)**
 

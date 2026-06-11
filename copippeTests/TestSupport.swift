@@ -14,7 +14,9 @@ final class TestDefaults {
 
     deinit {
         defaults.removePersistentDomain(forName: suiteName)
-        // removePersistentDomain は内容を消すが、cfprefsd が空の plist ファイルを残すため直接削除する
+        // synchronize で cfprefsd の保留書き込みを確定させてからファイルを消す。
+        // これを挟まないと、削除後に空の plist が非同期で書き出されて残留する。
+        defaults.synchronize()
         let plistURL = FileManager.default
             .urls(for: .libraryDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Preferences/\(suiteName).plist")

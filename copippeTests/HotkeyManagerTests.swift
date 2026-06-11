@@ -6,10 +6,10 @@ import AppKit
 @MainActor
 struct HotkeyManagerTests {
 
+    private let testDefaults = TestDefaults()
+
     private func makeManager() -> HotkeyManager {
-        // Clear persisted hotkeys
-        UserDefaults.standard.removeObject(forKey: "copippe_hotkeys")
-        return HotkeyManager()
+        HotkeyManager(defaults: testDefaults.defaults)
     }
 
     @Test("Register and retrieve hotkey")

@@ -14,7 +14,10 @@ final class HotkeyManager {
         modifiers: NSEvent.ModifierFlags([.control, .option]).rawValue
     )
 
-    init() {
+    private let defaults: UserDefaults
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         loadHotkeys()
     }
 
@@ -106,12 +109,12 @@ final class HotkeyManager {
             serializable[key] = binding
         }
         if let data = try? JSONEncoder().encode(serializable) {
-            UserDefaults.standard.set(data, forKey: Self.hotkeyDefaultsKey)
+            defaults.set(data, forKey: Self.hotkeyDefaultsKey)
         }
     }
 
     private func loadHotkeys() {
-        guard let data = UserDefaults.standard.data(forKey: Self.hotkeyDefaultsKey),
+        guard let data = defaults.data(forKey: Self.hotkeyDefaultsKey),
               let serializable = try? JSONDecoder().decode([String: HotkeyBinding].self, from: data) else {
             return
         }
