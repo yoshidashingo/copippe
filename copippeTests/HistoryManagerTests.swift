@@ -99,6 +99,7 @@ struct HistoryManagerTests {
 
         let results = manager.search("hello")
         #expect(results.count == 2)
+        #expect(results.allSatisfy { $0.textValue?.lowercased().contains("hello") == true })
     }
 
     @Test("Search returns empty for no matches")
@@ -108,6 +109,17 @@ struct HistoryManagerTests {
         manager.addEntry(.text(value: "Hello"))
         let results = manager.search("xyz")
         #expect(results.isEmpty)
+    }
+
+    @Test("Search returns all entries for empty query")
+    func searchEmptyQuery() {
+        let manager = makeManager()
+
+        manager.addEntry(.text(value: "Hello"))
+        manager.addEntry(.image(imageID: UUID()))
+
+        let results = manager.search("")
+        #expect(results == manager.entries)
     }
 
     @Test("Image entries are added")

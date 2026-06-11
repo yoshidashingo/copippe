@@ -133,23 +133,20 @@ struct PopupContentView: View {
 
     // MARK: - History List
 
-    private var filteredHistoryIndices: [Int] {
-        if searchText.isEmpty {
-            return Array(historyManager.entries.indices)
-        }
-        return historyManager.search(searchText)
+    private var filteredHistoryEntries: [HistoryEntry] {
+        historyManager.search(searchText)
     }
 
     private var historyListView: some View {
         Group {
-            if filteredHistoryIndices.isEmpty {
+            if filteredHistoryEntries.isEmpty {
                 emptyView("No history items")
             } else {
-                List(filteredHistoryIndices, id: \.self) { index in
-                    historyRowView(index: index)
+                List(filteredHistoryEntries) { entry in
+                    historyRowView(entry: entry)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            historyManager.copyToClipboard(at: index)
+                            historyManager.copy(entry)
                             onDismiss()
                         }
                 }
@@ -159,8 +156,7 @@ struct PopupContentView: View {
     }
 
     @ViewBuilder
-    private func historyRowView(index: Int) -> some View {
-        let entry = historyManager.entries[index]
+    private func historyRowView(entry: HistoryEntry) -> some View {
         HStack(spacing: 8) {
             switch entry {
             case .text(_, let string):

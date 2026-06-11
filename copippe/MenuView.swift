@@ -29,9 +29,9 @@ struct MenuView: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
             } else {
-                ForEach(Array(historyManager.entries.enumerated()), id: \.element.id) { index, entry in
+                ForEach(historyManager.entries) { entry in
                     Button {
-                        historyManager.copyToClipboard(at: index)
+                        historyManager.copy(entry)
                     } label: {
                         historyEntryLabel(entry)
                     }

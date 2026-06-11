@@ -61,10 +61,8 @@ final class HistoryManager {
         save()
     }
 
-    func copyToClipboard(at index: Int) {
-        guard entries.indices.contains(index) else { return }
-
-        switch entries[index] {
+    func copy(_ entry: HistoryEntry) {
+        switch entry {
         case .text(_, let string):
             Pasteboard.copy(string)
         case .image(_, let imageID):
@@ -74,14 +72,11 @@ final class HistoryManager {
         }
     }
 
-    func search(_ query: String) -> [Int] {
-        guard !query.isEmpty else { return Array(entries.indices) }
+    func search(_ query: String) -> [HistoryEntry] {
+        guard !query.isEmpty else { return entries }
         let lowercased = query.lowercased()
-        return entries.indices.filter { index in
-            if case .text(_, let string) = entries[index] {
-                return string.lowercased().contains(lowercased)
-            }
-            return false
+        return entries.filter { entry in
+            entry.textValue?.lowercased().contains(lowercased) == true
         }
     }
 
