@@ -1,6 +1,14 @@
 import SwiftUI
 import AppKit
 
+// MARK: - PopupState
+
+@MainActor
+@Observable
+final class PopupState {
+    var selectedTab: PopupTab = .history
+}
+
 // MARK: - PopupWindowController
 
 @MainActor
@@ -8,6 +16,7 @@ final class PopupWindowController {
     private var panel: NSPanel?
     private let historyManager: HistoryManager
     private let snippetManager: SnippetManager
+    private let popupState = PopupState()
 
     init(historyManager: HistoryManager, snippetManager: SnippetManager) {
         self.historyManager = historyManager
@@ -15,6 +24,8 @@ final class PopupWindowController {
     }
 
     func show(tab: PopupTab) {
+        popupState.selectedTab = tab
+
         if let panel = panel {
             panel.orderFront(nil)
             panel.makeKey()
@@ -25,7 +36,7 @@ final class PopupWindowController {
         let contentView = PopupContentView(
             historyManager: historyManager,
             snippetManager: snippetManager,
-            initialTab: tab,
+            popupState: popupState,
             onDismiss: { [weak self] in self?.hide() }
         )
 
@@ -55,7 +66,8 @@ final class PopupWindowController {
     }
 
     func toggle(tab: PopupTab) {
-        if panel != nil {
+        if panel != nil, popupState.selectedTab == tab {
+            // Same tab requested while visible: dismiss
             hide()
         } else {
             show(tab: tab)
@@ -68,16 +80,9 @@ final class PopupWindowController {
 struct PopupContentView: View {
     let historyManager: HistoryManager
     let snippetManager: SnippetManager
-    @State private var selectedTab: PopupTab
+    @Bindable var popupState: PopupState
     @State private var searchText = ""
     let onDismiss: () -> Void
-
-    init(historyManager: HistoryManager, snippetManager: SnippetManager, initialTab: PopupTab, onDismiss: @escaping () -> Void) {
-        self.historyManager = historyManager
-        self.snippetManager = snippetManager
-        self._selectedTab = State(initialValue: initialTab)
-        self.onDismiss = onDismiss
-    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -102,7 +107,7 @@ struct PopupContentView: View {
             .background(.bar)
 
             // Tab picker
-            Picker("", selection: $selectedTab) {
+            Picker("", selection: $popupState.selectedTab) {
                 Text("History").tag(PopupTab.history)
                 Text("Snippets").tag(PopupTab.snippets)
             }
@@ -113,7 +118,7 @@ struct PopupContentView: View {
             Divider()
 
             // Content
-            switch selectedTab {
+            switch popupState.selectedTab {
             case .history:
                 historyListView
             case .snippets:
