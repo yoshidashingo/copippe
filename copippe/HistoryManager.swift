@@ -7,23 +7,14 @@ final class HistoryManager {
     private(set) var entries: [HistoryEntry] = []
     let imageStore: ImageStore
     private let appState: AppState
-    private let storageFileURL: URL?
-
-    private var fileURL: URL {
-        if let storageFileURL {
-            return storageFileURL
-        }
-        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
-            ?? FileManager.default.temporaryDirectory
-        let appDir = container.appendingPathComponent("copippe", isDirectory: true)
-        try? FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: true)
-        return appDir.appendingPathComponent("history.json")
-    }
+    private let store: JSONFileStore<[HistoryEntry]>
 
     init(appState: AppState, fileURL: URL? = nil, imageStore: ImageStore = ImageStore()) {
         self.appState = appState
-        self.storageFileURL = fileURL
         self.imageStore = imageStore
+        self.store = JSONFileStore(
+            fileURL: fileURL ?? AppDirectories.appSupport().appendingPathComponent("history.json")
+        )
         load()
     }
 
@@ -98,29 +89,19 @@ final class HistoryManager {
     }
 
     func save() {
-        do {
-            let data = try JSONEncoder().encode(entries)
-            try data.write(to: fileURL, options: .atomic)
-        } catch {
-            // Best-effort persistence
-        }
+        store.save(entries)
     }
 
     func load() {
-        let url = fileURL
-        guard let data = try? Data(contentsOf: url) else {
-            entries = []
-            return
-        }
-
         // Try v2 format first
-        if let decoded = try? JSONDecoder().decode([HistoryEntry].self, from: data) {
+        if let decoded = store.load() {
             entries = decoded
             return
         }
 
         // Fallback: migrate from v1 format ([String])
-        if let legacyEntries = try? JSONDecoder().decode([String].self, from: data) {
+        if let data = store.loadData(),
+           let legacyEntries = try? JSONDecoder().decode([String].self, from: data) {
             entries = legacyEntries.compactMap { text in
                 let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
                 return trimmed.isEmpty ? nil : .text(value: trimmed)

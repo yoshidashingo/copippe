@@ -23,8 +23,10 @@
 		A10024 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10024 /* HotkeyManager.swift */; };
 		A10033 /* HotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10033 /* HotkeyManagerTests.swift */; };
 		A10034 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10034 /* TestSupport.swift */; };
+		A10036 /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10036 /* PersistenceTests.swift */; };
 		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
 		A10026 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10026 /* PreferencesWindow.swift */; };
+		A10035 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +59,10 @@
 		B10024 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		B10033 /* HotkeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManagerTests.swift; sourceTree = "<group>"; };
 		B10034 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
+		B10036 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
 		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
 		B10026 /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
+		B10035 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 				B10024 /* HotkeyManager.swift */,
 				B10025 /* PopupWindow.swift */,
 				B10026 /* PreferencesWindow.swift */,
+				B10035 /* Persistence.swift */,
 				B10006 /* Assets.xcassets */,
 				B10007 /* copippe.entitlements */,
 			);
@@ -117,6 +122,7 @@
 				B10031 /* SnippetManagerTests.swift */,
 				B10033 /* HotkeyManagerTests.swift */,
 				B10034 /* TestSupport.swift */,
+				B10036 /* PersistenceTests.swift */,
 			);
 			path = copippeTests;
 			sourceTree = "<group>";
@@ -233,6 +239,7 @@
 				A10024 /* HotkeyManager.swift in Sources */,
 				A10025 /* PopupWindow.swift in Sources */,
 				A10026 /* PreferencesWindow.swift in Sources */,
+				A10035 /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +253,7 @@
 				A10031 /* SnippetManagerTests.swift in Sources */,
 				A10033 /* HotkeyManagerTests.swift in Sources */,
 				A10034 /* TestSupport.swift in Sources */,
+				A10036 /* PersistenceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

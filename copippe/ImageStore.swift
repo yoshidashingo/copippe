@@ -11,12 +11,8 @@ final class ImageStore {
     private var thumbnailCache: [ThumbnailCacheKey: NSImage] = [:]
 
     init(directory: URL? = nil) {
-        if let directory = directory {
-            imagesDirectory = directory
-        } else {
-            let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-            imagesDirectory = container.appendingPathComponent("copippe/images", isDirectory: true)
-        }
+        imagesDirectory = directory
+            ?? AppDirectories.appSupport().appendingPathComponent("images", isDirectory: true)
         try? FileManager.default.createDirectory(at: imagesDirectory, withIntermediateDirectories: true)
     }
 
