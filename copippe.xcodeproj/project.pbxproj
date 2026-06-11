@@ -33,6 +33,7 @@
 		A10042 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* GeneralTab.swift */; };
 		A10043 /* HotkeyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10043 /* HotkeyTab.swift */; };
 		A10044 /* SnippetTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10044 /* SnippetTab.swift */; };
+		A10045 /* KeyCodeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10045 /* KeyCodeMap.swift */; };
 		A10035 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10035 /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		B10042 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
 		B10043 /* HotkeyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyTab.swift; sourceTree = "<group>"; };
 		B10044 /* SnippetTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetTab.swift; sourceTree = "<group>"; };
+		B10045 /* KeyCodeMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCodeMap.swift; sourceTree = "<group>"; };
 		B10035 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 				B10042 /* GeneralTab.swift */,
 				B10043 /* HotkeyTab.swift */,
 				B10044 /* SnippetTab.swift */,
+				B10045 /* KeyCodeMap.swift */,
 				B10035 /* Persistence.swift */,
 				B10037 /* Pasteboard.swift */,
 				B10039 /* StringPreview.swift */,
@@ -263,6 +266,7 @@
 				A10042 /* GeneralTab.swift in Sources */,
 				A10043 /* HotkeyTab.swift in Sources */,
 				A10044 /* SnippetTab.swift in Sources */,
+				A10045 /* KeyCodeMap.swift in Sources */,
 				A10035 /* Persistence.swift in Sources */,
 				A10037 /* Pasteboard.swift in Sources */,
 				A10039 /* StringPreview.swift in Sources */,
