@@ -5,8 +5,10 @@ import Testing
 @Suite("HistoryManager Tests")
 struct HistoryManagerTests {
 
+    private let testDefaults = TestDefaults()
+
     private func makeManager(maxHistoryCount: Int = 30) -> HistoryManager {
-        let appState = AppState()
+        let appState = AppState(defaults: testDefaults.defaults)
         appState.maxHistoryCount = maxHistoryCount
         let tempDir = FileManager.default.temporaryDirectory
             .appendingPathComponent("copippe-tests-\(UUID().uuidString)", isDirectory: true)

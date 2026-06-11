@@ -329,9 +329,16 @@ final class TestDefaults {
 
     deinit {
         defaults.removePersistentDomain(forName: suiteName)
+        // removePersistentDomain は内容を消すが、cfprefsd が空の plist ファイルを残すため直接削除する
+        let plistURL = FileManager.default
+            .urls(for: .libraryDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Preferences/\(suiteName).plist")
+        try? FileManager.default.removeItem(at: plistURL)
     }
 }
 ```
+
+実装時の知見(2026-06-11 実測): `removePersistentDomain` 単独ではドメイン内容はクリアされるものの、cfprefsd が空の plist ファイル(42 バイトの `{}`)を `~/Library/Preferences/` に残す。上記のとおりファイル削除まで行うことで残留ゼロになることを確認済み。
 
 - [ ] **Step 3: TestSupport.swift を pbxproj の**テストターゲット**に登録する(付録 A の「追加」手順。グループは `G10003 /* copippeTests */`、Sources はテストターゲット側)**
 
