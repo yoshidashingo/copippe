@@ -154,23 +154,6 @@ struct SnippetManagerTests {
         #expect(manager.folders[0].snippets.isEmpty)
     }
 
-    @Test("Move snippet between folders")
-    func moveSnippet() {
-        let manager = makeManager()
-
-        let folder1 = manager.addFolder(name: "Source")
-        let folder2 = manager.addFolder(name: "Destination")
-        let snippet = manager.addSnippet(folderID: folder1.id, title: "Moving", content: "Content")!
-
-        manager.moveSnippet(id: snippet.id, toFolderID: folder2.id)
-
-        let srcFolder = manager.folders.first { $0.id == folder1.id }!
-        let dstFolder = manager.folders.first { $0.id == folder2.id }!
-        #expect(srcFolder.snippets.isEmpty)
-        #expect(dstFolder.snippets.count == 1)
-        #expect(dstFolder.snippets[0].title == "Moving")
-    }
-
     @Test("Search snippets by title and content")
     func searchSnippets() {
         let manager = makeManager()
@@ -184,18 +167,4 @@ struct SnippetManagerTests {
         #expect(results.count == 2)
     }
 
-    @Test("Move folder reorders list")
-    func moveFolder() {
-        let manager = makeManager()
-
-        manager.addFolder(name: "A")
-        manager.addFolder(name: "B")
-        manager.addFolder(name: "C")
-
-        manager.moveFolder(from: 2, to: 0)
-
-        #expect(manager.folders[0].name == "C")
-        #expect(manager.folders[1].name == "A")
-        #expect(manager.folders[2].name == "B")
-    }
 }

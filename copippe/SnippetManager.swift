@@ -47,15 +47,6 @@ final class SnippetManager {
         save()
     }
 
-    func moveFolder(from sourceIndex: Int, to destinationIndex: Int) {
-        guard folders.indices.contains(sourceIndex),
-              destinationIndex >= 0, destinationIndex <= folders.count else { return }
-        let folder = folders.remove(at: sourceIndex)
-        let adjustedIndex = destinationIndex > sourceIndex ? destinationIndex - 1 : destinationIndex
-        folders.insert(folder, at: min(adjustedIndex, folders.count))
-        save()
-    }
-
     // MARK: - Snippet Operations
 
     @discardableResult
@@ -99,33 +90,6 @@ final class SnippetManager {
         save()
     }
 
-    func moveSnippet(id: UUID, toFolderID: UUID) {
-        // Validate destination folder exists before removing from source
-        guard let targetIndex = folders.firstIndex(where: { $0.id == toFolderID }) else { return }
-
-        var snippet: Snippet?
-        for folderIndex in folders.indices {
-            if let snippetIndex = folders[folderIndex].snippets.firstIndex(where: { $0.id == id }) {
-                snippet = folders[folderIndex].snippets.remove(at: snippetIndex)
-                break
-            }
-        }
-        guard let snippet = snippet else { return }
-        folders[targetIndex].snippets.append(snippet)
-        save()
-    }
-
-    func reorderSnippet(folderID: UUID, from sourceIndex: Int, to destinationIndex: Int) {
-        guard let folderIndex = folders.firstIndex(where: { $0.id == folderID }) else { return }
-        let snippets = folders[folderIndex].snippets
-        guard snippets.indices.contains(sourceIndex),
-              destinationIndex >= 0, destinationIndex <= snippets.count else { return }
-        let snippet = folders[folderIndex].snippets.remove(at: sourceIndex)
-        let adjustedIndex = destinationIndex > sourceIndex ? destinationIndex - 1 : destinationIndex
-        folders[folderIndex].snippets.insert(snippet, at: min(adjustedIndex, folders[folderIndex].snippets.count))
-        save()
-    }
-
     // MARK: - Search
 
     func search(_ query: String) -> [Snippet] {
@@ -148,13 +112,6 @@ final class SnippetManager {
             }
         }
         return nil
-    }
-
-    func allSnippetsWithHotkeys() -> [(Snippet, HotkeyBinding)] {
-        folders.flatMap { $0.snippets }.compactMap { snippet in
-            guard let hotkey = snippet.hotkey else { return nil }
-            return (snippet, hotkey)
-        }
     }
 
     // MARK: - Persistence

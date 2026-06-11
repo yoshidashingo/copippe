@@ -59,15 +59,6 @@ final class HistoryManager {
         save()
     }
 
-    func removeEntry(at index: Int) {
-        guard entries.indices.contains(index) else { return }
-        let removed = entries.remove(at: index)
-        if case .image(_, let imageID) = removed {
-            imageStore.delete(id: imageID)
-        }
-        save()
-    }
-
     func clearAll() {
         // Delete all image files
         for entry in entries {

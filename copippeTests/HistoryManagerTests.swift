@@ -78,21 +78,6 @@ struct HistoryManagerTests {
         #expect(manager.entries.isEmpty)
     }
 
-    @Test("Remove entry at index")
-    func removeEntry() {
-        let manager = makeManager()
-
-        manager.addEntry(.text(value: "a"))
-        manager.addEntry(.text(value: "b"))
-        manager.addEntry(.text(value: "c"))
-
-        manager.removeEntry(at: 1)
-
-        #expect(manager.entries.count == 2)
-        #expect(manager.entries[0] == .text(value: "c"))
-        #expect(manager.entries[1] == .text(value: "a"))
-    }
-
     @Test("Clear all removes everything")
     func clearAll() {
         let manager = makeManager()
@@ -102,16 +87,6 @@ struct HistoryManagerTests {
         manager.clearAll()
 
         #expect(manager.entries.isEmpty)
-    }
-
-    @Test("Remove at invalid index does nothing")
-    func removeInvalidIndex() {
-        let manager = makeManager()
-
-        manager.addEntry(.text(value: "a"))
-        manager.removeEntry(at: 5)
-
-        #expect(manager.entries.count == 1)
     }
 
     @Test("Search finds matching text entries")
