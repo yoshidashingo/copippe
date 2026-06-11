@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 
 /// テスト用に隔離された UserDefaults。
@@ -21,5 +22,18 @@ final class TestDefaults {
             .urls(for: .libraryDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Preferences/\(suiteName).plist")
         try? FileManager.default.removeItem(at: plistURL)
+    }
+}
+
+/// テスト用に隔離された NSPasteboard。解放時に releaseGlobally でシステムから除去する。
+final class TestPasteboard {
+    let pasteboard: NSPasteboard
+
+    init() {
+        pasteboard = NSPasteboard(name: NSPasteboard.Name("copippe-tests-\(UUID().uuidString)"))
+    }
+
+    deinit {
+        pasteboard.releaseGlobally()
     }
 }

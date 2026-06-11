@@ -63,16 +63,13 @@ final class HistoryManager {
 
     func copyToClipboard(at index: Int) {
         guard entries.indices.contains(index) else { return }
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
 
         switch entries[index] {
         case .text(_, let string):
-            pasteboard.setString(string, forType: .string)
+            Pasteboard.copy(string)
         case .image(_, let imageID):
-            if let image = imageStore.load(id: imageID),
-               let tiffData = image.tiffRepresentation {
-                pasteboard.setData(tiffData, forType: .tiff)
+            if let image = imageStore.load(id: imageID) {
+                Pasteboard.copy(image)
             }
         }
     }

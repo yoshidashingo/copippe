@@ -49,9 +49,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self.popupController?.toggle(tab: .snippets)
             case .snippet(let id):
                 if let snippet = self.snippetManager.snippet(for: id) {
-                    let pasteboard = NSPasteboard.general
-                    pasteboard.clearContents()
-                    pasteboard.setString(snippet.content, forType: .string)
+                    Pasteboard.copy(snippet.content)
                 }
             }
         }

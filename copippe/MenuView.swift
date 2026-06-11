@@ -56,9 +56,7 @@ struct MenuView: View {
                         } else {
                             ForEach(folder.snippets) { snippet in
                                 Button {
-                                    let pasteboard = NSPasteboard.general
-                                    pasteboard.clearContents()
-                                    pasteboard.setString(snippet.content, forType: .string)
+                                    Pasteboard.copy(snippet.content)
                                 } label: {
                                     HStack {
                                         Text(snippet.title)

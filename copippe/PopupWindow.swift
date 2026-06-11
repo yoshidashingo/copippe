@@ -265,9 +265,7 @@ struct PopupContentView: View {
     }
 
     private func copySnippet(_ snippet: Snippet) {
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.setString(snippet.content, forType: .string)
+        Pasteboard.copy(snippet.content)
         onDismiss()
     }
 

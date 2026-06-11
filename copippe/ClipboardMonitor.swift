@@ -57,10 +57,8 @@ final class ClipboardMonitor {
 
         // Write plain text back to clipboard only when active
         if appState.isActive {
-            let pb = NSPasteboard.general
-            pb.clearContents()
-            pb.setString(plainText, forType: .string)
-            lastChangeCount = pb.changeCount
+            Pasteboard.copy(plainText)
+            lastChangeCount = NSPasteboard.general.changeCount
         }
     }
 
