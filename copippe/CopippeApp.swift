@@ -57,11 +57,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         hotkeyManager.start()
 
-        // Register login item
-        do {
-            try SMAppService.mainApp.register()
-        } catch {
-            // Not critical
+        // Register login item only on first launch.
+        // Re-registering on every launch would override the user's choice
+        // to disable "Launch at login" in Preferences (General tab).
+        let didRegisterKey = "copippe_didRegisterLoginItem"
+        if !UserDefaults.standard.bool(forKey: didRegisterKey) {
+            do {
+                try SMAppService.mainApp.register()
+                UserDefaults.standard.set(true, forKey: didRegisterKey)
+            } catch {
+                // Not critical; retry on next launch
+            }
         }
     }
 
