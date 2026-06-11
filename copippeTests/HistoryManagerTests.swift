@@ -5,11 +5,17 @@ import Testing
 @Suite("HistoryManager Tests")
 struct HistoryManagerTests {
 
-    private func makeManager() -> HistoryManager {
+    private func makeManager(maxHistoryCount: Int = 30) -> HistoryManager {
         let appState = AppState()
-        let manager = HistoryManager(appState: appState)
-        manager.clearAll()
-        return manager
+        appState.maxHistoryCount = maxHistoryCount
+        let tempDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("copippe-tests-\(UUID().uuidString)", isDirectory: true)
+        try? FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true)
+        return HistoryManager(
+            appState: appState,
+            fileURL: tempDir.appendingPathComponent("history.json"),
+            imageStore: ImageStore(directory: tempDir.appendingPathComponent("images", isDirectory: true))
+        )
     }
 
     @Test("Add text entry inserts at beginning")
@@ -49,10 +55,7 @@ struct HistoryManagerTests {
 
     @Test("Max entries enforced at configured limit")
     func maxEntries() {
-        let appState = AppState()
-        appState.maxHistoryCount = 20
-        let manager = HistoryManager(appState: appState)
-        manager.clearAll()
+        let manager = makeManager(maxHistoryCount: 20)
 
         for i in 0..<25 {
             manager.addEntry(.text(value: "entry \(i)"))
@@ -60,9 +63,6 @@ struct HistoryManagerTests {
 
         #expect(manager.entries.count == 20)
         #expect(manager.entries[0] == .text(value: "entry 24"))
-
-        // Cleanup
-        appState.maxHistoryCount = 30
     }
 
     @Test("Empty and whitespace text entries are ignored")

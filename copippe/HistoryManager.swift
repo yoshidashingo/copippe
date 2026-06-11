@@ -5,31 +5,26 @@ import Observation
 @Observable
 final class HistoryManager {
     private(set) var entries: [HistoryEntry] = []
-    let imageStore = ImageStore()
+    let imageStore: ImageStore
     private let appState: AppState
+    private let storageFileURL: URL?
 
     private var fileURL: URL {
-        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        if let storageFileURL {
+            return storageFileURL
+        }
+        let container = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? FileManager.default.temporaryDirectory
         let appDir = container.appendingPathComponent("copippe", isDirectory: true)
         try? FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: true)
         return appDir.appendingPathComponent("history.json")
     }
 
-    init(appState: AppState) {
+    init(appState: AppState, fileURL: URL? = nil, imageStore: ImageStore = ImageStore()) {
         self.appState = appState
+        self.storageFileURL = fileURL
+        self.imageStore = imageStore
         load()
-    }
-
-    // Test-only initializer
-    init(appState: AppState, fileURL: URL) {
-        self.appState = appState
-        self._testFileURL = fileURL
-        load()
-    }
-
-    private var _testFileURL: URL?
-    private var resolvedFileURL: URL {
-        _testFileURL ?? fileURL
     }
 
     func addEntry(_ entry: HistoryEntry) {
@@ -114,14 +109,14 @@ final class HistoryManager {
     func save() {
         do {
             let data = try JSONEncoder().encode(entries)
-            try data.write(to: resolvedFileURL, options: .atomic)
+            try data.write(to: fileURL, options: .atomic)
         } catch {
             // Best-effort persistence
         }
     }
 
     func load() {
-        let url = resolvedFileURL
+        let url = fileURL
         guard let data = try? Data(contentsOf: url) else {
             entries = []
             return
