@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 final class AppState {
     private static let isActiveKey = "copippe_isActive"

@@ -3,6 +3,7 @@ import Testing
 @testable import copippe
 
 @Suite("JSONFileStore Tests")
+@MainActor
 struct PersistenceTests {
 
     private func temporaryFileURL() -> URL {

@@ -2,6 +2,7 @@ import Foundation
 import AppKit
 import Observation
 
+@MainActor
 @Observable
 final class SnippetManager {
     static let defaultFolderName = "New Folder"

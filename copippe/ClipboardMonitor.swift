@@ -2,6 +2,7 @@ import Foundation
 import AppKit
 import Observation
 
+@MainActor
 @Observable
 final class ClipboardMonitor {
     private var timer: Timer?
@@ -20,7 +21,9 @@ final class ClipboardMonitor {
         stopMonitoring()
         lastChangeCount = NSPasteboard.general.changeCount
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            self?.checkClipboard()
+            MainActor.assumeIsolated {
+                self?.checkClipboard()
+            }
         }
     }
 

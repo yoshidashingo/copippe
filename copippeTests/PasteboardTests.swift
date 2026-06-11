@@ -3,6 +3,7 @@ import Testing
 @testable import copippe
 
 @Suite("Pasteboard Tests")
+@MainActor
 struct PasteboardTests {
 
     private let testPasteboard = TestPasteboard()

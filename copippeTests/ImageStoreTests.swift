@@ -3,6 +3,7 @@ import AppKit
 @testable import copippe
 
 @Suite("ImageStore Tests")
+@MainActor
 struct ImageStoreTests {
 
     private func makeStore() -> ImageStore {

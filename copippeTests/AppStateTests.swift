@@ -3,6 +3,7 @@ import Testing
 @testable import copippe
 
 @Suite("AppState Tests")
+@MainActor
 struct AppStateTests {
 
     private let testDefaults = TestDefaults()

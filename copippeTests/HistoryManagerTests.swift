@@ -3,6 +3,7 @@ import Testing
 @testable import copippe
 
 @Suite("HistoryManager Tests")
+@MainActor
 struct HistoryManagerTests {
 
     private let testDefaults = TestDefaults()

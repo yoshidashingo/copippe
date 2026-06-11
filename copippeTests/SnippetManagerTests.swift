@@ -3,6 +3,7 @@ import Testing
 @testable import copippe
 
 @Suite("SnippetManager Tests")
+@MainActor
 struct SnippetManagerTests {
 
     private func makeManager() -> SnippetManager {

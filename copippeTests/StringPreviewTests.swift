@@ -2,6 +2,7 @@ import Testing
 @testable import copippe
 
 @Suite("String singleLinePreview Tests")
+@MainActor
 struct StringPreviewTests {
 
     @Test("Newlines are flattened to spaces")

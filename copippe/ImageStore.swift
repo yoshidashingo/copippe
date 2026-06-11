@@ -1,6 +1,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 final class ImageStore {
     private struct ThumbnailCacheKey: Hashable {
         let id: UUID
