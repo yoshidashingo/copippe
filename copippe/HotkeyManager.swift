@@ -63,11 +63,6 @@ final class HotkeyManager {
         saveHotkeys()
     }
 
-    func updateHotkey(action: HotkeyAction, binding: HotkeyBinding) {
-        registeredHotkeys[action] = binding
-        saveHotkeys()
-    }
-
     func binding(for action: HotkeyAction) -> HotkeyBinding? {
         registeredHotkeys[action]
     }

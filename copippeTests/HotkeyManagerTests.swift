@@ -60,14 +60,14 @@ struct HotkeyManagerTests {
         #expect(conflict == nil)
     }
 
-    @Test("Update hotkey replaces binding")
-    func updateHotkey() {
+    @Test("Registering again replaces existing binding")
+    func reRegisterReplacesBinding() {
         let manager = makeManager()
         let old = HotkeyBinding(keyCode: 9, modifiers: 0)
         let new = HotkeyBinding(keyCode: 12, modifiers: 0)
 
         manager.registerHotkey(action: .showHistory, binding: old)
-        manager.updateHotkey(action: .showHistory, binding: new)
+        manager.registerHotkey(action: .showHistory, binding: new)
 
         let retrieved = manager.binding(for: .showHistory)
         #expect(retrieved?.keyCode == 12)

@@ -92,7 +92,7 @@ struct HotkeyTab: View {
                                 // Show conflict warning
                                 _ = conflict
                             } else {
-                                hotkeyManager.updateHotkey(action: .showHistory, binding: binding)
+                                hotkeyManager.registerHotkey(action: .showHistory, binding: binding)
                             }
                         }
                     )
