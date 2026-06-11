@@ -1,33 +1,25 @@
 # macOS
 .DS_Store
 
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.moved-aside
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
 # Editor
 *.swp
 *.swo
 *~
-
-# IDE
 .vscode/
 .idea/
+
+# AI tooling
 .claude/
-
-# Work
-output/
-
-# Logs
-logs/
-!logs/.gitkeep
-
-# MCP config (contains API keys)
-#.mcp.json
-
-# Google Workspace CLI (credentials & token cache)
-.gws/
-.env.gws
-
-# pptx
-~$*.pptx
-
-# AI-DLC
-.steering/
-aidlc-docs/
+.omc/
