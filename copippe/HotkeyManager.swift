@@ -1,6 +1,7 @@
 import Foundation
 import AppKit
 import Carbon.HIToolbox
+import os
 
 @MainActor
 final class HotkeyManager {
@@ -103,8 +104,11 @@ final class HotkeyManager {
             }
             serializable[key] = binding
         }
-        if let data = try? JSONEncoder().encode(serializable) {
+        do {
+            let data = try JSONEncoder().encode(serializable)
             defaults.set(data, forKey: Self.hotkeyDefaultsKey)
+        } catch {
+            Logger.persistence.error("Failed to encode hotkeys: \(error.localizedDescription)")
         }
     }
 

@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import os
 
 @MainActor
 final class ImageStore {
@@ -30,6 +31,7 @@ final class ImageStore {
             try pngData.write(to: fileURL, options: .atomic)
             return id
         } catch {
+            Logger.persistence.error("Failed to save image: \(error.localizedDescription)")
             return nil
         }
     }

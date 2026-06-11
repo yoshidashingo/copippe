@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 /// Application Support 配下の copippe ディレクトリ解決(全ストレージで共通)
 enum AppDirectories {
@@ -32,7 +33,7 @@ struct JSONFileStore<Value: Codable> {
             let data = try JSONEncoder().encode(value)
             try data.write(to: fileURL, options: .atomic)
         } catch {
-            // Best-effort persistence(Phase 7 でログを追加する)
+            Logger.persistence.error("Failed to save \(fileURL.lastPathComponent): \(error.localizedDescription)")
         }
     }
 }

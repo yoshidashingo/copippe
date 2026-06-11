@@ -30,6 +30,7 @@
 		A10040 /* StringPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10040 /* StringPreviewTests.swift */; };
 		A10025 /* PopupWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10025 /* PopupWindow.swift */; };
 		A10046 /* PopupContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10046 /* PopupContentView.swift */; };
+		A10047 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10047 /* Logging.swift */; };
 		A10041 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10041 /* PreferencesView.swift */; };
 		A10042 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10042 /* GeneralTab.swift */; };
 		A10043 /* HotkeyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10043 /* HotkeyTab.swift */; };
@@ -75,6 +76,7 @@
 		B10040 /* StringPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPreviewTests.swift; sourceTree = "<group>"; };
 		B10025 /* PopupWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindow.swift; sourceTree = "<group>"; };
 		B10046 /* PopupContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupContentView.swift; sourceTree = "<group>"; };
+		B10047 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		B10041 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		B10042 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
 		B10043 /* HotkeyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyTab.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				B10024 /* HotkeyManager.swift */,
 				B10025 /* PopupWindow.swift */,
 				B10046 /* PopupContentView.swift */,
+				B10047 /* Logging.swift */,
 				B10041 /* PreferencesView.swift */,
 				B10042 /* GeneralTab.swift */,
 				B10043 /* HotkeyTab.swift */,
@@ -266,6 +269,7 @@
 				A10024 /* HotkeyManager.swift in Sources */,
 				A10025 /* PopupWindow.swift in Sources */,
 				A10046 /* PopupContentView.swift in Sources */,
+				A10047 /* Logging.swift in Sources */,
 				A10041 /* PreferencesView.swift in Sources */,
 				A10042 /* GeneralTab.swift in Sources */,
 				A10043 /* HotkeyTab.swift in Sources */,

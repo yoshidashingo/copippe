@@ -1,5 +1,6 @@
 import SwiftUI
 import ServiceManagement
+import os
 
 @main
 struct CopippeApp: App {
@@ -64,7 +65,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try SMAppService.mainApp.register()
                 UserDefaults.standard.set(true, forKey: didRegisterKey)
             } catch {
-                // Not critical; retry on next launch
+                Logger.app.error("Failed to register login item: \(error.localizedDescription)")
             }
         }
     }
